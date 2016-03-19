@@ -1,0 +1,14 @@
+{
+    "name": "VpuSchedule",
+    "application": null,
+    "libs": {},
+    "view": {},
+    "model": {},
+    "service": {
+        "network": "\\source\\service\\network",
+        "parser": "\\source\\service\\parser"
+    },
+    "screen": {},
+    "external": {},
+    "links": {}
+}
