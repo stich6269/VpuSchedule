@@ -2,7 +2,9 @@
     "name": "VpuSchedule",
     "application": null,
     "libs": {},
-    "view": {},
+    "view": {
+        "home": "\\source\\views\\home"
+    },
     "model": {},
     "service": {
         "network": "\\source\\service\\network",
@@ -10,5 +12,8 @@
     },
     "screen": {},
     "external": {},
-    "links": {}
+    "links": {},
+    "collection": {
+        "groups": "\\source\\models\\groups"
+    }
 }

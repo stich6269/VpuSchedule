@@ -4,9 +4,13 @@
     
     var scripts = [
         
+        "source/models/groups/groups.js",
+        
         "source/service/network/network.js",
         
         "source/service/parser/parser.js",
+        
+        "source/views/home/home.js",
         
         "source/application/application.js"
     ];
@@ -16,7 +20,7 @@
         var core = window.RAD.core,
             application = window.RAD.application,
             coreOptions = {
-                defaultBackstack: false,
+                defaultBackstack: true,
                 defaultAnimation: 'none',
                 animationTimeout: 3000,
                 debug: false
