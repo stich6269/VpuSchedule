@@ -1,72 +1,4 @@
 (function () {
-
-    function parseData(data, needError, needSuccess) {
-        var json, message;
-
-        try {
-            json = JSON.parse(data);
-        } catch (e) {
-            json = data;
-        }
-
-        if (json.hasOwnProperty('SearchResult')) {
-            try {
-                json.SearchResult = JSON.parse(json.SearchResult);
-            } catch (e) {}
-        }
-
-        if (json.hasOwnProperty('serializedJSONBody') && json.serializedJSONBody && json.serializedJSONBody.length) {
-            try {
-                json.serializedJSONBody = JSON.parse(json.serializedJSONBody);
-            } catch (e) {
-            }
-        }
-
-        if (needError && json.hasOwnProperty('errorMessage') && json.errorMessage.length ||
-            needError && json.hasOwnProperty('_ErrorMessages') && json._ErrorMessages.length && json._ErrorMessages[0].length)
-        {
-            if (json.hasOwnProperty('errorMessage')) {
-                try {
-                    json.errorMessage = JSON.parse(json.errorMessage);
-                } catch (e) {}
-                if (json.errorMessage && json.errorMessage.hasOwnProperty('ErrorMessages')) {
-                    message = json.errorMessage.ErrorMessages;
-
-                    if(message.length && message[0]) {
-                        message = message[0];
-                        if (/<a.+<\/a>/i.test(message)) {
-                            message = message.replace(/<a.+<\/a>/i, function (f, i, s) {
-                                return f.slice(f.indexOf('>') + 1).replace(/<\/a>/i, '');
-                            });
-                        }
-                    }
-                } else {
-                    message = json.errorMessage;
-                }
-            } else {
-                message = json._ErrorMessages;
-            }
-
-            RAD.core.publish('application.alert', {
-                message: message,
-                title: 'Warning'
-            });
-        }
-
-
-        if (needSuccess && json.hasOwnProperty('_SuccessMessages') && json._SuccessMessages.length) {
-            RAD.core.publish('application.alert', {
-                message: json._SuccessMessages
-            });
-        }
-
-        if(RAD.application.verbose) {
-            console.log(JSON.stringify(json, undefined, 4));
-            console.groupEnd();
-        }
-        return json;
-    }
-
     var BASE_URL = 'http://www.model.poltava.ua/index.php?option=com_content&view=',
         ABOUT_PAGE = BASE_URL + 'category&id=58&Itemid=215/',
 
@@ -114,21 +46,20 @@
                 timeout: Obj.longTimeout ? 90000 : 15000,
                 data: data,
                 headers: '',
-                contentType: Obj.contentType || "application/json",
+                contentType: Obj.contentType || "html",
                 beforeSend: function () {
                     !Obj.silent && self.loadingShow();
                 },
                 success: function (data) {
-                    var response = parseData(data, Obj.needErrorMsg, Obj.needSuccessMsg);
                     !Obj.silent && self.loadingHide();
-
                     if (typeof Obj.success === 'function') {
-                        Obj.success(response);
+                        Obj.success(data);
                     }
                 },
                 error: function (jqXHR) {
                     jqXHR.status != 200 && self.showError(jqXHR.status);
                     self.loadingHide();
+
                     if (typeof Obj.error === 'function') {
                         Obj.error(jqXHR);
                     }
@@ -142,7 +73,6 @@
 
             return jqXHR;
         },
-
         checkConnection: function () {
             var status = {
                 connected: false,
@@ -160,7 +90,6 @@
                 states[Connection.CELL_4G] = 'Cell 4G connection';
                 states[Connection.CELL] = 'Cell generic connection';
                 states[Connection.NONE] = 'No network connection';
-
                 status.connected = networkState !== Connection.NONE;
                 status.type = states[networkState];
             } else {
@@ -169,7 +98,6 @@
             }
             return status;
         },
-
         showError: function (statusCode) {
             var statusMsg = {
                     0: 'Server is currently unavailable. Please try again later',
@@ -194,20 +122,18 @@
 
 
         get_about_page: function (options) {
-            console.log('get page');
             this.ajaxRequest({
                 type: 'get',
                 url: network.get('aboutPage'),
                 success: options.success,
-                error: options.error
+                needErrorMsg: true
             });
         },
 
-
         onReceiveMsg: function (channel, data) {
-            console.log(channel, data);
             var parts = channel.split('.'),
                 method = parts[2];
+
             if (typeof this[method] === 'function') {
                 this[method](data);
             }

@@ -1,0 +1,19 @@
+.group-container.scroll-view {
+    height: 499px;
+}
+
+ul.group-ul {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.group-ul li {
+    display: block;
+    padding: 10px 0 10px 25px;
+    margin: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
