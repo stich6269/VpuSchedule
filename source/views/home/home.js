@@ -21,8 +21,28 @@ RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
     },
     onItem: function(e){
         var $elem = $(e.currentTarget),
-            id = $elem.attr('id');
+            self = this,
+            id = $elem.attr('id'),
+            currentModel  = this.model.get({id: id}).toJSON();
 
-        console.log(this.model.get({id: id}).toJSON());
+        if(currentModel.link){
+            this.publish('service.network.get_schedule_page',{
+                extras: {
+                    url: currentModel.link
+                },
+                success: function(resp){
+                    if(resp){
+                        self.publish('service.parser.getGroupSchedule', {
+                            extras: {
+                                html: resp
+                            },
+                            success: function (result) {
+                                console.log(result)
+                            }
+                        })
+                    }
+                }
+            })
+        }
     }
 }));

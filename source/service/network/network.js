@@ -5,7 +5,8 @@
         Network = Backbone.Model.extend({
             initialize: function () {
                 this.set({
-                    aboutPage: ABOUT_PAGE
+                    aboutPage: ABOUT_PAGE,
+                    baseUrl: BASE_URL
                 });
             }
         }),
@@ -125,6 +126,15 @@
             this.ajaxRequest({
                 type: 'get',
                 url: network.get('aboutPage'),
+                success: options.success,
+                needErrorMsg: true
+            });
+        },
+
+        get_schedule_page: function (options) {
+            this.ajaxRequest({
+                type: 'get',
+                url: network.get('baseUrl') + options.extras.url,
                 success: options.success,
                 needErrorMsg: true
             });
