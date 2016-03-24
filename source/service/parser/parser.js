@@ -36,8 +36,10 @@ RAD.service("service.parser", RAD.Blanks.Service.extend({
         }
     },
     getGroupSchedule: function(data){
-        var scheduleArr = [],
+        var dayArr = [],
+            resultArr = [],
             self = this,
+            dayCounter = 0,
             $page = $(data.extras.html),
             cb = data.success,
             $content = $page.find('.contentpaneopen'),
@@ -46,34 +48,43 @@ RAD.service("service.parser", RAD.Blanks.Service.extend({
             currentRows;
 
         $tr.each(function(rowCounter, item){
-            currentRows =  $(item).children()
+            currentRows =  $(item).children();
 
             if(rowCounter == 0){
                 currentRows.each(function(collCounter, col){
                     if(collCounter){
-                        scheduleArr.push({
-                            date: $(col).html()
-                        });
+                        dayArr.push($(col).html());
                     }
                 });
             }else if(rowCounter != 1){
                 for (var i = 1; i <  currentRows.length; i = i+2) {
-                    var currentNumber =  Math.round(i/2)- 1,
-                        lessons = scheduleArr[currentNumber],
+                    var lessons = {},
                         lessonsStr = $(currentRows[i]).html(),
                         auditoryAttr =  $(currentRows[i+1]).html().split('*'),
                         auditory = +auditoryAttr[0],
                         building = +auditoryAttr[1] || (auditory && 1),
                         lessonsAttrs = self.parseLessonsAttr(lessonsStr);
 
+
                     lessons.auditory = auditory;
+                    lessons.date = dayArr[dayCounter];
                     lessons.building = building;
+                    lessons.dayId = dayCounter;
                     _.extend(lessons, lessonsAttrs);
+                    resultArr.push(lessons);
+                    dayCounter++;
+
+                    if(dayCounter == 5){
+                        dayCounter = 0;
+                    }
+
                 }
             }
+            
         });
-
-        console.log(scheduleArr);
+        var datta = _.where(resultArr, {date: dayArr[0]});
+       // var evens = _.filter(resultArr, function(item){ return item.date == dayArr[0].date; });
+        console.log(datta);
         //typeof cb == 'function' && cb($tr);
     },
     parseLessonsAttr: function(lessonsStr){
