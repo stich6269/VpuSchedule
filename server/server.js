@@ -1,11 +1,17 @@
 var Crawler = require("crawler"),
     url = require('url'),
-    http = require('http');
+    http = require('http'),
+    Entities =  require('html-entities').AllHtmlEntities,
+    entities = new Entities();
+
+
 
 var c = new Crawler({
     maxConnections : 10,
     callback : function (error, result, $) {
-        console.log($('.sub'));
+        $('.sub').each(function (index, item) {
+            console.log(entities.decode($(item).html()));
+        });
         
     }
 });
@@ -16,7 +22,6 @@ c.queue('http://www.model.poltava.ua/index.php?option=com_contact&view=contact&i
 
 
 /*
-
 // Queue a list of URLs 
 c.queue(['http://jamendo.com/','http://tedxparis.com']);
 
