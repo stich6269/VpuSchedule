@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "crawler" : "*",
-    " html-entities" : "*"
+    "html-entities" : "*",
+    "underscore" : "*",
+    "deferred" : "*"
   }
 }
