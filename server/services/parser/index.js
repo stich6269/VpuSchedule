@@ -90,6 +90,7 @@ module.exports = {
         
         // var evens = _.filter(resultArr, function(item){ return item.date == dayArr[0].date; });
         console.log(Buffer.byteLength(JSON.stringify(data), 'utf8'));
+        console.log(data);
         //typeof cb == 'function' && cb($tr);
     },
     parseLessonsAttr: function(lessonsStr){
