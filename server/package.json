@@ -5,6 +5,8 @@
     "crawler" : "*",
     "html-entities" : "*",
     "underscore" : "*",
-    "deferred" : "*"
+    "deferred" : "*",
+    "mongodb" : "*",
+    "mongoose" : "*"
   }
 }
