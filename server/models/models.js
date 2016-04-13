@@ -34,9 +34,24 @@ var Lesson = mongoose.model('Lesson', {
     }
 });
 
+var Week = mongoose.model('Week', {
+    date: {
+        type: Date,
+        default: Date.now()
+    },
+    schedule:  {
+        type: mongoose.Schema.Types.Mixed
+    },
+    groupName: {
+        type: String,
+        default: ''
+    }
+});
+
 var Group = mongoose.model('Group', {
     name:  {
         type: String,
+        unique: true,
         default: ''
     },
     link: {
@@ -47,5 +62,6 @@ var Group = mongoose.model('Group', {
 
 module.exports = {
     lesson: Lesson,
-    group: Group
+    group: Group,
+    week: Week
 };

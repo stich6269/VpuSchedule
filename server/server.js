@@ -19,14 +19,10 @@ var getGroups = new Crawler({
             
        
                 for (var i = 0; i < result.length; i++) {
-                    var obj = result[i];
-                    obj.save(function (err, model) {
-                        console.log('saved', model);
-                    });
-
+                    var obj = result[i].save();
                 }
             
-            //getSchedule(result);
+            getSchedule(result);
         })
     }
 });
@@ -41,9 +37,15 @@ function getSchedule(lessonsCollection) {
     var getGroups = new Crawler({
         maxConnections : 1,
         callback : function (error, result, $) {
-            console.log(lessonsCollection[counter].name);
-            parser.getGroupSchedule($);
-            counter++;
+            console.log('End ger group arr...');
+            console.log('Start get schedule...');
+
+            var groupName = lessonsCollection[counter].name,
+                model = parser.getGroupSchedule($, groupName);
+            
+                model.save(function (err, model) {
+                    console.log('schedule saved to db...');
+                })
         }
     });
 

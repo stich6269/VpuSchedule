@@ -37,7 +37,7 @@ module.exports = {
             return def.promise()
         }
     },
-    getGroupSchedule: function($){
+    getGroupSchedule: function($, groupName){
         var dayArr = [],
             resultArr = [],
             self = this,
@@ -59,7 +59,7 @@ module.exports = {
                 });
             }else if(rowCounter != 1){
                 for (var i = 1; i <  currentRows.length; i = i+2) {
-                    var lessons = {},
+                    var lesson = {},
                         lessonsStr = entities.decode($(currentRows[i]).html()),
                         auditoryAttr =  entities.decode($(currentRows[i+1]).html()).split('*'),
                         auditory = +auditoryAttr[0],
@@ -67,12 +67,13 @@ module.exports = {
                         lessonsAttrs = self.parseLessonsAttr(lessonsStr);
 
 
-                    lessons.auditory = auditory;
-                    lessons.date = dayArr[dayCounter];
-                    lessons.building = building;
-                    lessons.dayId = dayCounter;
-                    _.extend(lessons, lessonsAttrs);
-                    resultArr.push(lessons);
+                    lesson.auditory = auditory;
+                    lesson.date = dayArr[dayCounter];
+                    lesson.building = building;
+                    lesson.dayId = dayCounter;
+                    _.extend(lesson, lessonsAttrs);
+                    
+                    resultArr.push(lesson);
                     dayCounter++;
 
                     if(dayCounter == 5){
@@ -83,16 +84,23 @@ module.exports = {
             }
 
         });
-       
-        var data = {};
+        
+        return this.createWeek(dayArr, resultArr, groupName)
+    },
+    createWeek: function (dayArr, resultArr, groupName) {
+        var data = {}, 
+            schedule;
+        
         for (var i = 0; i < dayArr.length; i++) {
             data[dayArr[i]] = _.where(resultArr, {date: dayArr[i]});
         }
+
+        schedule = new models.week({
+            schedule: JSON.stringify(data),
+            groupName: groupName
+        });
         
-        // var evens = _.filter(resultArr, function(item){ return item.date == dayArr[0].date; });
-        console.log(Buffer.byteLength(JSON.stringify(data), 'utf8'));
-        console.log(data);
-        //typeof cb == 'function' && cb($tr);
+        return schedule
     },
     parseLessonsAttr: function(lessonsStr){
         var begin = lessonsStr.indexOf('('),
