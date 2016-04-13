@@ -3,9 +3,10 @@
     // #script_begin#
     
     var scripts = [
+        "source/lib/moment.min.js",
         
         "source/models/groups/groups.js",
-        
+
         "source/service/network/network.js",
         
         "source/service/parser/parser.js",

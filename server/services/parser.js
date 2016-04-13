@@ -2,6 +2,7 @@ var Entities =  require('html-entities').AllHtmlEntities,
     entities = new Entities(),
     _ = require('underscore'),
     deferred = require('deferred'),
+    moment = require('moment'),
     models = require('../models/models');
 
 module.exports = {
@@ -37,6 +38,37 @@ module.exports = {
             return def.promise()
         }
     },
+    getTeachers: function () {
+        var self = this,
+            linkPref = 'http://www.model.poltava.ua',
+            def = deferred(),
+            link = '',
+            result = [],
+            $subLinks,
+            currentStr,
+            $currElem;
+
+        if($){
+            $subLinks = $('.sub');
+            $subLinks.each(function(i, item){
+                $currElem = $(item);
+                currentStr = entities.decode($currElem.html());
+                link = linkPref + $currElem.attr('href');
+
+                if(currStr.split('.').length == 3){
+                    var model = new models.group({
+                        name: currentStr,
+                        link: link
+                    });
+                    result.push(model);
+                }
+
+                def.resolve(result)
+            });
+
+            return def.promise()
+        }
+    },
     getGroupSchedule: function($, groupName){
         var dayArr = [],
             resultArr = [],
@@ -54,7 +86,7 @@ module.exports = {
                 currentRows.each(function(collCounter, col){
                     if(collCounter){
                         var date = entities.decode($(col).html());
-                        dayArr.push(date);
+                        dayArr.push(self.formatDate(date));
                     }
                 });
             }else if(rowCounter != 1){
@@ -89,18 +121,37 @@ module.exports = {
     },
     createWeek: function (dayArr, resultArr, groupName) {
         var data = {}, 
-            schedule;
+            schedule,
+            weekNumber = '';
         
         for (var i = 0; i < dayArr.length; i++) {
             data[dayArr[i]] = _.where(resultArr, {date: dayArr[i]});
+
+            if(!weekNumber.length){
+                if(typeof +dayArr[i] == 'number'){
+                    weekNumber = moment(+dayArr[i]).week()+'';
+                }
+            }
         }
 
         schedule = new models.week({
             schedule: JSON.stringify(data),
-            groupName: groupName
+            groupName: groupName,
+            weekNumber: +weekNumber
         });
         
         return schedule
+    },
+    formatDate: function (dateStr) {
+        console.log(dateStr);
+        
+        var dateArr = dateStr.split(',')[1].trim().split('.'),
+            month = dateArr.splice(1,1),
+            date;
+
+        dateArr.unshift(month);
+        date = dateArr.join('-');
+        return +new Date(date)
     },
     parseLessonsAttr: function(lessonsStr){
         var begin = lessonsStr.indexOf('('),

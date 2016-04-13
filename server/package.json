@@ -2,11 +2,12 @@
   "name": "application-name",
   "version": "0.0.1",
   "dependencies": {
-    "crawler" : "*",
-    "html-entities" : "*",
-    "underscore" : "*",
-    "deferred" : "*",
-    "mongodb" : "*",
-    "mongoose" : "*"
+    "crawler": "*",
+    "deferred": "*",
+    "html-entities": "*",
+    "moment": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "underscore": "*"
   }
 }

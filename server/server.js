@@ -43,12 +43,18 @@ function getSchedule(lessonsCollection) {
             var groupName = lessonsCollection[counter].name,
                 model = parser.getGroupSchedule($, groupName);
             
-                model.save(function (err, model) {
-                    console.log('schedule saved to db...');
-                })
+            counter++;
+            model.save(function (err, model) {
+                if(err){
+                    console.error(err);
+                }else{
+                    console.log(counter + "  " + groupName + ' schedule saved to db...');
+                }
+                
+            })
         }
     });
 
 
-    getGroups.queue(linkArr[0]);
+    getGroups.queue(linkArr);
 }
