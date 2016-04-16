@@ -1,38 +1,35 @@
-var mongoose = require('mongoose');
+//Dependencies
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var Week = mongoose.model('Week', {
-    updated: {
-        type: Date,
-        default: Date.now()
-    },
-    weekNumber: {
-        type: Number,
-        min: 0,
-        max: 48,
-        default: 0
-    },
-    schedule:  {
-        type: mongoose.Schema.Types.Mixed
-    },
-    groupName: {
-        type: String,
-        default: ''
-    }
+//Schema for group model
+var GroupSchema = new Schema({
+    name:  {type: String, unique: true, default: ''},
+    link: {type: String, default: ''},
+    students: [{ type: Schema.ObjectId, ref: 'User' }]
 });
 
-var Group = mongoose.model('Group', {
-    name:  {
-        type: String,
-        unique: true,
-        default: ''
-    },
-    link: {
-        type: String,
-        default: ''
-    }
+//Schema for teacher model
+var TeacherSchema = new Schema({
+    name: {type: String, unique: true, default: ''},
+    link: {type: String, default: ''},
+    user: {type: Schema.ObjectId, ref: 'User' }
 });
 
+
+//Schema for lesson model
+var LessonSchema = new Schema({
+    number: {type: Number, default: 0},
+    auditory: {type: String, default: ''},
+    type: {type: String, default: ''},
+    subject: {type: String, default: ''},
+    teacher: {type: String, default: ''},
+    group: {type: String, default: ''},
+    date: {type: Date}
+});
+
+//Exports
 module.exports = {
-    group: Group,
-    week: Week
+    Group:  mongoose.model('Group', GroupSchema),
+    Teacher:  mongoose.model('Teacher', TeacherSchema)
 };

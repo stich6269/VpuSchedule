@@ -1,60 +1,12 @@
-var siteUrl = 'http://www.model.poltava.ua/index.php?option=com_contact&view=contact&id=1&Itemid=220',
-    Crawler = require("crawler"),
-    http = require('http'),
-    parser = require('./services/parser'),
-    _ = require('underscore'),
-    deferred = require('deferred'),
-    Entities =  require('html-entities').AllHtmlEntities,
-    entities = new Entities(),
-    db = require('./services/mongodb');
+//Dependencies
+var pageGrabber = require('./services/spider/spider');
+//var db = require('./services/mongodb');
 
 
-var getGroups = new Crawler({
-    maxConnections : 1,
-    callback : function (error, result, $) {
-        var def = parser.getGroups($);
-        console.log('End ger group arr...');
-        def.done(function (result) {
-            console.log('Start get schedule...');
-            
-       
-                for (var i = 0; i < result.length; i++) {
-                    var obj = result[i].save();
-                }
-            
-            getSchedule(result);
-        })
-    }
+pageGrabber.on('got-links', function (result) {
+    console.log('Done parse link');
+    pageGrabber.getLessons(result.groups);
 });
 
-console.log('Start ger group arr...');
-getGroups.queue(siteUrl);
 
-
-function getSchedule(lessonsCollection) {
-    var linkArr = _.pluck(lessonsCollection, 'link');
-    var counter = 0;
-    var getGroups = new Crawler({
-        maxConnections : 1,
-        callback : function (error, result, $) {
-            console.log('End ger group arr...');
-            console.log('Start get schedule...');
-
-            var groupName = lessonsCollection[counter].name,
-                model = parser.getGroupSchedule($, groupName);
-            
-            counter++;
-            model.save(function (err, model) {
-                if(err){
-                    console.error(err);
-                }else{
-                    console.log(counter + "  " + groupName + ' schedule saved to db...');
-                }
-                
-            })
-        }
-    });
-
-
-    getGroups.queue(linkArr);
-}
+pageGrabber.getScheduleLinks();
