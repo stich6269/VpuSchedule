@@ -30,7 +30,7 @@ var LessonSchema = new Schema({
 
 //Exports
 module.exports = {
-    Group:  mongoose.model('Group', GroupSchema),
-    Teacher:  mongoose.model('Teacher', TeacherSchema),
-    Lesson:  mongoose.model('Lesson', LessonSchema)
+    Group:  mongoose.model('groups', GroupSchema),
+    Teacher:  mongoose.model('teachers', TeacherSchema),
+    Lesson:  mongoose.model('lessons', LessonSchema)
 };

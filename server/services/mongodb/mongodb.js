@@ -1,45 +1,77 @@
 //Dependencies
-var mongoose = require('mongoose');
-var util = require("util");
-var EventEmitter = require("events").EventEmitter;
-var async = require("async");
-var _ = require("underscore");
+var mongoose = require('mongoose'),
+    util = require("util"),
+    EventEmitter = require("events").EventEmitter,
+    async = require("async");
 
-mongoose.set('debug', true);
+
 //DB update data constructor with EE
-util.inherits(ManageSchedule, EventEmitter);
-function ManageSchedule() {
-    this.dbLink = 'mongodb://localhost/vpu7';
-    this.processData = null;
-
-    EventEmitter.call(this);
-
-    this.dropDatabase();
-
+util.inherits(DatabaseDriver, EventEmitter);
+function DatabaseDriver() {
+    this.dbName = 'VPU7Schedule';
+    this.dbLink = 'mongodb://localhost/' + this.dbName;
+    this.debugMode = true;
+    this.native = mongoose.connection;
+    this.collections = [];
+    this.initialize();
 }
 
-ManageSchedule.prototype.dropDatabase = function () {
+DatabaseDriver.prototype.initialize = function () {
+    var self = this;
+
+    EventEmitter.call(this);
     mongoose.connect(this.dbLink);
-    mongoose.connection.on('connected', function () {
-        var db = mongoose.connection.db;
-        db.dropDatabase(function () {
-            mongoose.disconnect();
-        })
-    });
+    mongoose.set('debug', this.debugMode);
+
+    this.native.on('open', function () {
+        self.collections = Object.keys(self.native.collections);
+
+    })
+
 };
 
-ManageSchedule.prototype.saveCollection = function (data) {
-    if(_.isArray(data)){
-        async.eachSeries(data, function (item, callback) {
-            console.log(item);
-            item.save(callback)
-        }, function (err, result) {
-            console.log(result);
+
+
+
+
+
+
+
+
+DatabaseDriver.prototype.dropCollections = function () {
+    var self = this;
+
+    if(this.collections.length){
+        async.eachSeries(this.collections, function (item, callback) {
+            self.native.collections[item].drop(callback);
+        }, function () {
+            self.emit('db:initialized');
         });
     }
 };
 
 
+
+
+
+
+
+
+
+
+DatabaseDriver.prototype.saveCollection = function (data) {
+    if(data.length){
+        async.eachSeries(data, function (item, callback) {
+            item.save(callback)
+        }, function (err, result) {
+            console.log(result, 'saved');
+        });
+    }
+};
+
+
+
+
 //Exports
-module.exports = new ManageSchedule();
+module.exports = new DatabaseDriver();
 
