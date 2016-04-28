@@ -40,22 +40,8 @@ Parser.prototype.parseLinks = function($){
                 }));
             }
         });
-
-    } else{
-        for (var i = 0; i < 50; i++) {
-            groupArr.push(new models.Group({
-                name: 'group' + i,
-                link: 'test'
-            }));
-
-            teacherArr.push(new models.Teacher({
-                name: 'teacher' + i,
-                link: 'test'
-            }));
-        }
     }
-
-
+    
     return {
         teachers: teacherArr,
         groups: groupArr
