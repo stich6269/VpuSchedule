@@ -2,10 +2,11 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
     url: 'source/views/setup/setup.html',
     carousel: null,
     events: {
-        'click .slide' : 'onSlide'
+        'click .slide' : 'onSlide',
+        'click .btn' : 'onSubmit'
     },
-    onBeforeAttach: function(){
-
+    onSubmit: function(){
+        console.log('go to the next page')
     },
     onEndAttach: function () {
         var self = this;
