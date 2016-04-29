@@ -1,17 +1,32 @@
 RAD.view("view.setup", RAD.Blanks.View.extend({
-
     url: 'source/views/setup/setup.html',
+    carousel: null,
+    events: {
+        'click .slide' : 'onSlide'
+    },
     onBeforeAttach: function(){
 
     },
     onEndAttach: function () {
-        var carousel;
+        var self = this;
 
-        carousel = this.$("#slider-list");
-        carousel.itemslide({
+        this.carousel = this.$("#slider-list");
+        this.carousel.itemslide({
             start: 0,
             duration: 500
         });
+
+        this.carousel.on('changeActiveIndex', function(e) {
+            var currentPosition = self.carousel.getActiveIndex(),
+                elements = self.$('.slide');
+
+            elements.toggleClass('active', false);
+            $(elements[currentPosition]).toggleClass('active', true);
+        });
+    },
+    onSlide: function (e) {
+        var value = +$(e.currentTarget).attr('data-target');
+        this.carousel.gotoSlide(value)
     }
 /*
     onInitialize: function () {

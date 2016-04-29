@@ -54,8 +54,8 @@ li {
 }
 
 .image-for-slider {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -86,7 +86,7 @@ ul#slider-list li {
 .text-wrap {
     =: absolute
     left: 50px;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .center-block.center.bind-bottom {
@@ -98,4 +98,36 @@ ul#slider-list li {
 
 button.btn.long {
     width: 220px;
+}
+
+p.text-help {
+    margin: 5% 0 5% 0;
+    padding: 5%;
+    =: rgba(0, 0, 0, 0.42)
+    width: 112%;
+    width: 112%;
+    margin-left: -6%;
+    /* background: #1A283A; */
+}
+
+ul#slider-control {
+    height: 20px;
+    left: 50%;
+    margin-left: -30px;
+    position: absolute;
+    bottom: 14%;
+}
+
+li.slide {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #283D57;
+    margin-right: 20px;
+    border-radius: 100%;
+}
+
+li.slide.active {
+    background: #FDAE5F;
+    transition: background .3s linear;
 }
