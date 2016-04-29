@@ -12,7 +12,8 @@
 
         "source/views/home/home.js",
         "source/views/initialize/initialize.js",
-        "source/views/setup/setup.js"
+        "source/views/setup/setup.js",
+        "source/views/select_account/select_account.js"
     ];
     // #script_end#
     function onEndLoad() {

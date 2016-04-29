@@ -6,7 +6,13 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
         'click .btn' : 'onSubmit'
     },
     onSubmit: function(){
-        console.log('go to the next page')
+        var options = {
+            container_id: '#screen',
+            content: "view.select_account",
+            animation: 'slide'
+        };
+
+        this.publish('navigation.show', options);
     },
     onEndAttach: function () {
         var self = this;
