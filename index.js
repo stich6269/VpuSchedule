@@ -4,16 +4,15 @@
     
     var scripts = [
         "source/lib/moment.min.js",
-        
-        "source/models/groups/groups.js",
+        "source/lib/itemslide.min.js",
 
-        "source/service/network/network.js",
+        "source/models/groups/groups.js",
         
-        "source/service/parser/parser.js",
-        
+        "source/application/application.js",
+
         "source/views/home/home.js",
-        
-        "source/application/application.js"
+        "source/views/initialize/initialize.js",
+        "source/views/setup/setup.js"
     ];
     // #script_end#
     function onEndLoad() {
@@ -23,7 +22,7 @@
             coreOptions = {
                 defaultBackstack: true,
                 defaultAnimation: 'none',
-                animationTimeout: 3000,
+                animationTimeout: 4000,
                 debug: false
             };
 

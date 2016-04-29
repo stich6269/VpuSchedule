@@ -3,13 +3,12 @@
     "application": null,
     "libs": {},
     "view": {
-        "home": "\\source\\views\\home"
+        "home": "\\source\\views\\home",
+        "initialize": "\\source\\views\\initialize",
+        "setup": "\\source\\views\\setup"
     },
     "model": {},
-    "service": {
-        "network": "\\source\\service\\network",
-        "parser": "\\source\\service\\parser"
-    },
+    "service": {},
     "screen": {},
     "external": {},
     "links": {},

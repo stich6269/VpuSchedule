@@ -1,3 +1,7 @@
+body{
+    background: #456896;
+}
+
 .group-container.scroll-view {
     height: 499px;
 }
@@ -16,4 +20,82 @@ ul.group-ul li {
     margin: 5px;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.logo-wrapper {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin: -120px 0 0 -100px;
+    background: url("../images/vpu7-logo.png") no-repeat 50% 50%;
+    background-size: initial;
+}
+
+/*setup screen*/
+#scrolling {
+    overflow: hidden;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+li {
+    float: left;
+    transition: opacity .1s linear;
+}
+
+.image-for-slider {
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+ul#slider-list {
+    width: 600px;
+}
+
+ul#slider-list .itemslide-active {
+    display: block;
+    opacity: 1;
+    transition: opacity .5s cubic-bezier(0.4, 0, 1, 1);
+}
+
+ul#slider-list li {
+    opacity: 0;
+    padding: 10px;
+}
+
+.image-for-slider.student{
+    background-image: url("../images/student-icon.png");
+}
+
+.image-for-slider.teacher{
+    background-image: url("../images/teacher-icon.png");
+}
+
+.text-wrap {
+    =: absolute
+    left: 50px;
+    font-size: 30px;
+}
+
+.center-block.center.bind-bottom {
+    position: absolute;
+    left: 50%;
+    margin-left: -110px;
+    bottom: 5%;
+}
+
+button.btn.long {
+    width: 220px;
 }
