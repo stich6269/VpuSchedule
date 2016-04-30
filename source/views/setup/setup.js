@@ -14,7 +14,7 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
 
         this.publish('navigation.show', options);
     },
-    onEndAttach: function () {
+    onStartAttach: function () {
         var self = this;
 
         this.carousel = this.$("#slider-list");
@@ -34,6 +34,9 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
     onSlide: function (e) {
         var value = +$(e.currentTarget).attr('data-target');
         this.carousel.gotoSlide(value)
+    },
+    onEndDetach: function () {
+        this.render();
     }
 /*
     onInitialize: function () {
