@@ -6,8 +6,9 @@
         "source/lib/moment.min.js",
         "source/lib/itemslide.min.js",
 
+        "source/services/network/network.js",
+
         "source/models/groups/groups.js",
-        
         "source/application/application.js",
 
         "source/views/home/home.js",

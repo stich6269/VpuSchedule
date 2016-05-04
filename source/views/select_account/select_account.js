@@ -8,6 +8,16 @@ RAD.view("view.select_account", RAD.Blanks.ScrollableView.extend({
 
         $('.item').toggleClass('active', false);
         value.toggleClass('active', true)
+    },
+    onBeforeAttach: function(){
+        this.publish('service.network.get_groups', {
+            success: function (resp) {
+                console.log(resp)
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
     }
 /*
     onInitialize: function () {
