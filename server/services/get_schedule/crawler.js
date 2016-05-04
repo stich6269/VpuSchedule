@@ -4,12 +4,13 @@ var http = require('http');
 var util = require("util");
 var _ = require('underscore');
 var EventEmitter = require("events").EventEmitter;
-var parser = require('../parser/parser');
+var parser = require('./html_parser');
+var fs = require('fs');
 
 //Parse groups constructor with EE
 util.inherits(PageGrabber, EventEmitter);
 function PageGrabber() {
-    this.startPageLink = 'http://www.model.poltava.ua/index.php?option=com_content&view=category&id=63&Itemid=223';
+    this.startPageLink = 'http://webcache.googleusercontent.com/search?q=cache:http://www.model.poltava.ua/&gws_rd=cr&ei=L-spV8y-NYSb6ATrs47oBw'; //'http://www.model.poltava.ua/index.php?option=com_content&view=category&id=63&Itemid=223';
     EventEmitter.call(this);
 }
 
@@ -18,12 +19,17 @@ PageGrabber.prototype.getScheduleLinks = function () {
         getStartPage = new Crawler({
             maxConnections : 1,
             callback : function (error, result, $) {
-                self.emit("got-links", parser.parseLinks($));
+                //console.log(result)
+                if(!error){
+                    self.emit("got-links", parser.parseLinks($));
+                }else{
+                    console.log(error)
+                }
             }
         });
 
     console.log('Start ger group arr...');
-    getStartPage.queue(this.startPageLink);
+    getStartPage.queue(self.startPageLink);
 };
 
 PageGrabber.prototype.getLessons = function (groupsModels) {
