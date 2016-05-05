@@ -1,7 +1,7 @@
 (function(){
     var Group = Backbone.Model.extend({
         defaults: {
-            id: '',
+            _id: '',
             name: '',
             course: null,
             link: ''

@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var GroupSchema = new Schema({
     name:  {type: String, unique: true, default: ''},
     link: {type: String, default: ''},
+    course: {type: Number, default: 1},
     students: [{ type: Schema.ObjectId, ref: 'User' }]
 });
 

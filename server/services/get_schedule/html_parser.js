@@ -19,6 +19,7 @@ Parser.prototype.parseLinks = function($){
         teacherArr = [],
         self = this,
         link = '',
+        course = null,
         currentStr;
 
     if($){
@@ -27,9 +28,11 @@ Parser.prototype.parseLinks = function($){
             link = self.linkPref + $(item).attr('href');
             
             if(self.isGroup(currentStr)){
+                course = parseInt(currentStr.split('-')[1].slice(0,1));
                 groupArr.push(new models.Group({
                     name: currentStr,
-                    link: link
+                    link: link,
+                    course: course
                 }));
             }
 
