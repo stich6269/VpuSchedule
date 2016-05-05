@@ -15,8 +15,7 @@ function  Parser() {
 
 //Create group collection
 Parser.prototype.parseLinks = function($){
-    var groupArr = [],
-        teacherArr = [],
+    var results = [],
         self = this,
         link = '',
         course = null,
@@ -29,7 +28,7 @@ Parser.prototype.parseLinks = function($){
             
             if(self.isGroup(currentStr)){
                 course = parseInt(currentStr.split('-')[1].slice(0,1));
-                groupArr.push(new models.Group({
+                results.push(new models.Group({
                     name: currentStr,
                     link: link,
                     course: course
@@ -37,7 +36,7 @@ Parser.prototype.parseLinks = function($){
             }
 
             if(self.isTeacher(currentStr)){
-                teacherArr.push(new models.Teacher({
+                results.push(new models.Teacher({
                     name: currentStr,
                     link: link
                 }));
@@ -45,10 +44,7 @@ Parser.prototype.parseLinks = function($){
         });
     }
     
-    return {
-        teachers: teacherArr,
-        groups: groupArr
-    }
+    return results
 };
 
 Parser.prototype.isGroup = function (linkText) {
@@ -61,7 +57,7 @@ Parser.prototype.isTeacher = function (linkText) {
 
 
 
-//Create lessons
+//Create lessons collections
 Parser.prototype.parseLessons = function($, groupName){
     var dayArr = [],
         resultArr = [],
@@ -96,7 +92,7 @@ Parser.prototype.parseLessons = function($, groupName){
                     };
 
                 _.extend(lesson, lessonsAttrs);
-                resultArr.push(lesson);
+                resultArr.push(new models.Lesson(lesson));
             }
         }
     });
@@ -104,6 +100,7 @@ Parser.prototype.parseLessons = function($, groupName){
     return resultArr
 };
 
+//Create date 
 Parser.prototype.formatDate = function (dateStr) {
    var dateArr = dateStr.split(',')[1].trim().split('.'),
         month = dateArr.splice(1,1),
@@ -114,6 +111,7 @@ Parser.prototype.formatDate = function (dateStr) {
     return +new Date(date)
 };
 
+//Get lessons attributes
 Parser.prototype.parseLessonsAttr = function(lessonsStr){
     var begin = lessonsStr.indexOf('('),
         subStr = lessonsStr.substr(begin),
@@ -129,8 +127,6 @@ Parser.prototype.parseLessonsAttr = function(lessonsStr){
     }
 
 };
-
-
 
 //Exports
 module.exports = new Parser();

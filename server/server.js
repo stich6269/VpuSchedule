@@ -1,12 +1,9 @@
-var getSchedule = require('./services/get_schedule'),
-    models = require('./models/models'),
-    mongoose = require('mongoose'),
-    async = require("async");
-    http = require('http');
+//Dependencies
+var models = require('./models/models');
+var mongoose = require('mongoose');
+var http = require('http');
 
-//getSchedule.start();
-
-
+//Setup and local variables
 var dbName = 'VPU7Schedule',
     dbLink = 'mongodb://localhost/' + dbName,
     native = mongoose.connection;

@@ -7,10 +7,11 @@ var EventEmitter = require("events").EventEmitter;
 var parser = require('./html_parser');
 var fs = require('fs');
 
+
 //Parse groups constructor with EE
 util.inherits(PageGrabber, EventEmitter);
 function PageGrabber() {
-    this.startPageLink = 'http://webcache.googleusercontent.com/search?q=cache:http://www.model.poltava.ua/&gws_rd=cr&ei=L-spV8y-NYSb6ATrs47oBw'; //'http://www.model.poltava.ua/index.php?option=com_content&view=category&id=63&Itemid=223';
+    this.startPageLink = 'http://webcache.googleusercontent.com/search?q=cache:http://www.model.poltava.ua/&gws_rd=cr&ei=L-spV8y-NYSb6ATrs47oBw';
     EventEmitter.call(this);
 }
 
@@ -19,7 +20,6 @@ PageGrabber.prototype.getScheduleLinks = function () {
         getStartPage = new Crawler({
             maxConnections : 1,
             callback : function (error, result, $) {
-                //console.log(result)
                 if(!error){
                     self.emit("got-links", parser.parseLinks($));
                 }else{
@@ -27,20 +27,20 @@ PageGrabber.prototype.getScheduleLinks = function () {
                 }
             }
         });
-
-    console.log('Start ger group arr...');
+    
     getStartPage.queue(self.startPageLink);
 };
 
-PageGrabber.prototype.getLessons = function (groupsModels) {
-    var linkArr = _.pluck(groupsModels, 'link'),
+PageGrabber.prototype.getLessons = function (collection) {
+    var linkArr = _.pluck(collection, 'link'),
         lessonsArr = [],
+        self = this,
         counter = 0;
 
     var getGroups = new Crawler({
         maxConnections : 1,
         callback : function (error, result, $) {
-            var groupName = groupsModels[counter].name;
+            var groupName = collection[counter].name;
                 groupsLessons = parser.parseLessons($, groupName);
 
             console.log(groupName + ' size: ' + Buffer.byteLength(JSON.stringify(groupsLessons), 'utf8'));
@@ -50,6 +50,7 @@ PageGrabber.prototype.getLessons = function (groupsModels) {
         onDrain: function() {
             console.log('done: ', lessonsArr.length);
             console.log('size: ',  Buffer.byteLength(JSON.stringify(lessonsArr), 'utf8'));
+            self.emit("got-lessons", lessonsArr);
         }
     });
 
