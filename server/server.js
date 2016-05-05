@@ -22,7 +22,6 @@ var dbName = 'VPU7Schedule',
                     res.end(JSON.stringify(result));
                 })
             }
-
         }).listen(3000);
     });
 

@@ -23,5 +23,14 @@ RAD.application(function (core) {
         }, 1000)
     };
 
+    app.showConfirm = function (data) {
+        var options = {
+            content: "view.confirm",
+            extras: data
+        };
+
+        core.publish('navigation.popup.show', options);
+    };
+
     return app;
 }, true);

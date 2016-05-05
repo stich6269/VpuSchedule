@@ -1,15 +1,20 @@
 RAD.view("view.setup", RAD.Blanks.View.extend({
-    url: 'source/views/setup/setup.html',
+    url: 'source/views/pages/setup/setup.html',
     carousel: null,
+    currentPosition: 0,
     events: {
         'click .slide' : 'onSlide',
         'click .btn' : 'onSubmit'
     },
     onSubmit: function(){
-        var options = {
+        var self = this,
+            options = {
             container_id: '#screen',
             content: "view.select_account",
-            animation: 'slide'
+            animation: 'slide',
+            extras: {
+                isTeacher: !!self.currentPosition
+            }
         };
 
         this.publish('navigation.show', options);
@@ -24,11 +29,11 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
         });
 
         this.carousel.on('changeActiveIndex', function(e) {
-            var currentPosition = self.carousel.getActiveIndex(),
-                elements = self.$('.slide');
-
+            var elements = self.$('.slide');
+            
+            self.currentPosition = self.carousel.getActiveIndex();
             elements.toggleClass('active', false);
-            $(elements[currentPosition]).toggleClass('active', true);
+            $(elements[self.currentPosition]).toggleClass('active', true);
         });
     },
     onSlide: function (e) {
@@ -38,35 +43,4 @@ RAD.view("view.setup", RAD.Blanks.View.extend({
     onEndDetach: function () {
         this.render();
     }
-/*
-    onInitialize: function () {
-        
-    },
-    onNewExtras: function (extras) {
-        
-    },
-    onReceiveMsg: function (channel, data) {
-        
-    },
-    onStartRender: function () {
-        
-    },
-    onEndRender: function () {
-        
-    },
-
-    onStartAttach: function () {
-        
-    },
-    onEndAttach: function () {
-        
-    },
-    onEndDetach: function () {
-        
-    },
-    onDestroy: function () {
-        
-    }
-*/
-
 }));

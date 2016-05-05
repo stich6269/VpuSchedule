@@ -189,3 +189,31 @@ li.slide.active {
 ul.scroll-list {
     width: 100%;
 }
+
+
+
+/*Confirm modal*/
+.modal-view {
+    background: rgba(0,0,0,.2);
+}
+
+.horisontal-center {
+    margin-top: 70% !important;
+}
+
+.message-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.buttons-container {
+    display: block;
+    font-size: 0;
+    width: 100%;
+}
+
+.button {
+    width: 50%;
+    font-size: 16px;
+    text-align: center
+}

@@ -215,7 +215,6 @@
 
 
         onReceiveMsg: function (channel, data) {
-            console.log(channel, data);
             var parts = channel.split('.'),
                 method = parts[2];
             if (typeof this[method] === 'function') {

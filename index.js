@@ -11,10 +11,12 @@
         "source/models/groups/groups.js",
         "source/application/application.js",
 
-        "source/views/home/home.js",
-        "source/views/initialize/initialize.js",
-        "source/views/setup/setup.js",
-        "source/views/select_account/select_account.js"
+        "source/views/pages/home/home.js",
+        "source/views/pages/initialize/initialize.js",
+        "source/views/pages/setup/setup.js",
+        "source/views/pages/select_account/select_account.js",
+        
+        "source/views/modals/confirm/confirm.js"
     ];
     // #script_end#
     function onEndLoad() {
