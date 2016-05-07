@@ -40,7 +40,7 @@ PageGrabber.prototype.getLessons = function (collection) {
     var getGroups = new Crawler({
         maxConnections : 1,
         callback : function (error, result, $) {
-            var groupName = collection[counter].name;
+            var groupName = collection[counter].name,
                 groupsLessons = parser.parseLessons($, groupName);
 
             console.log(groupName + ' size: ' + Buffer.byteLength(JSON.stringify(groupsLessons), 'utf8'));

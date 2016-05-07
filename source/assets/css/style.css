@@ -101,10 +101,10 @@ button.btn.long {width: 225px;}
 p.text-help {
     margin: 5% 0 5% 0;
     padding: 5%;
-    =: rgba(0, 0, 0, 0.42)
     width: 112%;
     width: 112%;
     margin-left: -6%;
+    font-size: 15px;
 }
 
 ul#slider-control {
@@ -178,7 +178,7 @@ li.slide.active {
 }
 
 .title {
-    font-size: 20px;
+    font-size: 17px;
     line-height: 28px;
 }
 
@@ -216,4 +216,108 @@ ul.scroll-list {
     width: 50%;
     font-size: 16px;
     text-align: center
+}
+
+
+/*Home page*/
+.menu-icon {
+    display: inline-block;
+    width: 30px;
+    height: 35px;
+    margin-top: 5px;
+    background-image: url("../images/menu-icon.png");
+    background-repeat: no-repeat;
+    background-size: 95% 100%;
+}
+
+.row.navigation {
+    margin-bottom: 0px;
+    height: 45px;
+}
+
+ul.days-list {
+    width: 96%;
+    margin-left: -3%;
+}
+
+ul.days-list li {
+    width: 14.28%;
+    text-align: center;
+    text-transform: uppercase;
+    opacity: .6;
+}
+
+.day-name {
+    font-size: 12px;
+}
+
+ul.days-list li.active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.schedule-wrapper {
+    background: white;
+    height: 85%;
+}
+
+.lessons-list li {
+    display: block;
+    padding: 0;
+    /* border: 1px solid; */
+    width: 100%;
+    background: #E2E2E2;
+    margin-bottom: 3px;
+    height: 70px;
+    overflow: hidden;
+}
+
+ul.lessons-list {
+    width: 94%;
+    margin-top: 5px;
+}
+
+.time-wrapper {
+    display: inline-block;
+    width: 25%;
+    font-size: 20px;
+    padding: 10px;
+    line-height: 25px;
+    border-right: 2px solid #F5B31F;
+    height: 70px;
+    vertical-align: middle;
+}
+
+.lesson-wrapper {
+    display: inline-block;
+    /* border: 1px solid; */
+    width: 73%;
+    text-align: left;
+    height: 70px;
+    vertical-align: middle;
+    padding-left: 3px;
+}
+
+.teacher {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.auditory {
+    height: 20px;
+    vertical-align: middle;
+}
+
+.end-time {
+    opacity: .6;
+}
+
+.subject {
+    font-size: 20px;
+    line-height: 25px;
 }

@@ -69,13 +69,15 @@
 
     var BASE_URL = 'http://127.0.0.1:3000/',
         GROUPS_LIST = BASE_URL + 'get_groups',
+        LESSONS_LIST = BASE_URL + 'get_schedule',
         TEACHERS_LIST = BASE_URL + 'get_teachers';
 
         Network = Backbone.Model.extend({
             initialize: function () {
                 this.set({
                     teachers: TEACHERS_LIST,
-                    groups: GROUPS_LIST
+                    groups: GROUPS_LIST,
+                    lessons: LESSONS_LIST
                 });
             }
         }),
@@ -208,6 +210,15 @@
             this.ajaxRequest({
                 type: 'get',
                 url: network.get('teachers'),
+                success: options.success,
+                error: options.error
+            });
+        },
+
+        get_schedule: function (options) {
+            this.ajaxRequest({
+                type: 'get',
+                url: network.get('lessons') + '?name=' + options.extras.name,
                 success: options.success,
                 error: options.error
             });

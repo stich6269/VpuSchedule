@@ -1,6 +1,7 @@
 RAD.view("view.select_account", RAD.Blanks.ScrollableView.extend({
     url: 'source/views/pages/select_account/select_account.html',
     isTeacher: true,
+    group: null,
     events: {
         'tap .item' : 'onItem'
     },
@@ -17,23 +18,40 @@ RAD.view("view.select_account", RAD.Blanks.ScrollableView.extend({
     onItem: function (e) {
         var value = $(e.currentTarget),
             id = value.attr('id'),
+            self = this,
             model;
 
         model = this.model.findWhere({_id: id}).toJSON();
+        this.group = model.name;
         $('.item').toggleClass('active', false);
         value.toggleClass('active', true);
         
-        RAD.application.showConfirm({
-            message: 'Вы выбрали аккаунт ' + model.name +
-            '. Желаете чтоб приложение запомнило Ваш выбор?',
-            success: function () {
-                console.log('success cb');
-            },
-            error: function () {
-                console.log('error cb');
-            }
-        })
+        setTimeout(function () {
+            RAD.application.showConfirm({
+                message: 'Вы выбрали аккаунт ' + model.name +
+                '. Желаете чтоб приложение запомнило Ваш выбор?',
+                success: function () {
+                    self.openHomePage();
+                },
+                error: function () {
+                    console.log('error cb');
+                }
+            })
+        }, 500)
 
+    },
+    openHomePage: function () {
+        var self = this,
+            options = {
+                container_id: '#screen',
+                content: "view.home",
+                animation: 'slide',
+                extras: {
+                    group: self.group
+                }
+            };
+
+        this.publish('navigation.show', options);
     },
     getGroups: function(){
         var self = this;

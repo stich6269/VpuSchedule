@@ -7,9 +7,11 @@
         "source/lib/itemslide.min.js",
 
         "source/services/network/network.js",
+        "source/application/application.js",
 
         "source/models/groups/groups.js",
-        "source/application/application.js",
+        "source/models/teachers/teachers.js",
+        "source/models/lessons/lessons.js",
 
         "source/views/pages/home/home.js",
         "source/views/pages/initialize/initialize.js",

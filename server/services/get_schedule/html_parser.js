@@ -103,12 +103,18 @@ Parser.prototype.parseLessons = function($, groupName){
 //Create date 
 Parser.prototype.formatDate = function (dateStr) {
    var dateArr = dateStr.split(',')[1].trim().split('.'),
-        month = dateArr.splice(1,1),
-        date;
+       month = dateArr.splice(1,1),
+       week = ['вс','пн','вт','ср','чт','пт','сб'],
+       date;
 
     dateArr.unshift(month);
-    date = dateArr.join('-');
-    return +new Date(date)
+    date = +new Date(dateArr.join('-'));
+
+    return {
+        local: date,
+        dayStr: week[moment(date).weekday()],
+        dayIndex: moment(date).weekday()
+    }
 };
 
 //Get lessons attributes
