@@ -14,31 +14,31 @@
     <div class="row navigation white-text">
         <div class="col s12">
             <ul class="days-list">
-                <li>
+                <li class="lesson" data-target="1">
                     <div class="day-name">пн</div>
                     <div class="day-date">13</div>
                 </li>
-                <li>
+                <li class="lesson" data-target="2">
                     <div class="day-name">вт</div>
                     <div class="day-date">14</div>
                 </li>
-                <li>
+                <li class="lesson" data-target="3">
                     <div class="day-name">ср</div>
                     <div class="day-date">15</div>
                 </li>
-                <li class="active">
+                <li class="lesson" data-target="4">
                     <div class="day-name">чт</div>
                     <div class="day-date">16</div>
                 </li>
-                <li>
+                <li class="lesson" data-target="5">
                     <div class="day-name">пт</div>
                     <div class="day-date">17</div>
                 </li>
-                <li>
+                <li class="lesson" data-target="6">
                     <div class="day-name">сб</div>
                     <div class="day-date">18</div>
                 </li>
-                <li>
+                <li class="lesson" data-target="7">
                     <div class="day-name">вс</div>
                     <div class="day-date">19</div>
                 </li>
@@ -47,75 +47,23 @@
     </div>
 </div>
 
-<div class="row schedule-wrapper">
-    <div class="col s12 center-align">
-        <ul class="lessons-list">
-            <li>
-                <div class="time-wrapper">
-                    <div class="start-time">09:00</div>
-                    <div class="end-time">10:00</div>
-                </div>
-                <div class="lesson-wrapper">
-                    <div class="subject">Химия</div>
-                    <div class="details">
-                        <div class="auditory">Аудит. 10*2</div>
-                        <div class="teacher">Преп. 1234567890123456</div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="time-wrapper">
-                    <div class="start-time">09:00</div>
-                    <div class="end-time">10:00</div>
-                </div>
-                <div class="lesson-wrapper">
-                    <div class="subject">Химия</div>
-                    <div class="details">
-                        <div class="auditory">Аудит. 10*2</div>
-                        <div class="teacher">Преп. 1234567890123456</div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="time-wrapper">
-                    <div class="start-time">09:00</div>
-                    <div class="end-time">10:00</div>
-                </div>
-                <div class="lesson-wrapper">
-                    <div class="subject">Химия</div>
-                    <div class="details">
-                        <div class="auditory">Аудит. 10*2</div>
-                        <div class="teacher">Преп. 1234567890123456</div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="time-wrapper">
-                    <div class="start-time">09:00</div>
-                    <div class="end-time">10:00</div>
-                </div>
-                <div class="lesson-wrapper">
-                    <div class="subject">Химия</div>
-                    <div class="details">
-                        <div class="auditory">Аудит. 10*2</div>
-                        <div class="teacher">Преп. 1234567890123456</div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="time-wrapper">
-                    <div class="start-time">09:00</div>
-                    <div class="end-time">10:00</div>
-                </div>
-                <div class="lesson-wrapper">
-                    <div class="subject">Химия</div>
-                    <div class="details">
-                        <div class="auditory">Аудит. 10*2</div>
-                        <div class="teacher">Преп. 1234567890123456</div>
-                    </div>
-                </div>
-            </li>
 
-        </ul>
-    </div>
+<div class="scroll-wrapper-lessons scroll-view">
+    <ul class="lessons-list">
+        {{# _.each(this.currentDay, function(item){ }}
+        <li>
+            <div class="time-wrapper">
+                <div class="start-time">09:00</div>
+                <div class="end-time">10:00</div>
+            </div>
+            <div class="lesson-wrapper">
+                <div class="subject">{{= item.subject }}</div>
+                <div class="details">
+                    <div class="auditory">Аудит. {{= item.auditory }}</div>
+                    <div class="teacher">Преп. {{= item.teacher }}</div>
+                </div>
+            </div>
+        </li>
+        {{# }) }}
+    </ul>
 </div>

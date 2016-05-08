@@ -258,23 +258,22 @@ ul.days-list li.active {
 
 .schedule-wrapper {
     background: white;
-    height: 85%;
 }
 
 .lessons-list li {
     display: block;
     padding: 0;
-    /* border: 1px solid; */
     width: 100%;
     background: #E2E2E2;
-    margin-bottom: 3px;
-    height: 70px;
+    margin-bottom: 4px;
     overflow: hidden;
 }
 
 ul.lessons-list {
     width: 94%;
     margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 3%;
 }
 
 .time-wrapper {
@@ -283,19 +282,18 @@ ul.lessons-list {
     font-size: 20px;
     padding: 10px;
     line-height: 25px;
-    border-right: 2px solid #F5B31F;
+    border-right: 5px solid #F5B31F;
     height: 70px;
     vertical-align: middle;
 }
 
 .lesson-wrapper {
     display: inline-block;
-    /* border: 1px solid; */
     width: 73%;
     text-align: left;
-    height: 70px;
+    height: 65px;
     vertical-align: middle;
-    padding-left: 3px;
+    padding-left: 5px;
 }
 
 .teacher {
@@ -318,6 +316,22 @@ ul.lessons-list {
 }
 
 .subject {
-    font-size: 20px;
-    line-height: 25px;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.scroll-wrapper-list {
+    height: 303px;
+}
+
+.details {
+    opacity: .6;
+}
+
+
+.scroll-wrapper-lessons  {
+    position: absolute;
+    height: 84%;
+    width: 100%;
+    background: white;
 }

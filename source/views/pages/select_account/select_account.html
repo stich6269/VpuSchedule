@@ -5,25 +5,23 @@
     </div>
 </div>
 
-<div class="">
-    <div class="scroll-wrapper scroll-view">
-        <ul class="scroll-list">
-            {{# var self = this; }}
-            {{# _.each(model, function(item){ }}
-                <li class="item" id="{{= item._id }}">
-                    <div class="image">{{= item.name[0] }}</div>
-                    <div class="info">
-                        <div class="title">{{= item.name }}</div>
+<div class="scroll-wrapper scroll-view">
+    <ul class="scroll-list">
+        {{# var self = this; }}
+        {{# _.each(model, function(item){ }}
+            <li class="item" id="{{= item._id }}">
+                <div class="image">{{= item.name[0] }}</div>
+                <div class="info">
+                    <div class="title">{{= item.name }}</div>
 
-                        {{# if(self.isTeacher){ }}
-                            <div class="description">Преподватель ВПУ7</div>
-                        {{# }else{ }}
-                            <div class="description">{{= item.courseStr }}</div>
-                        {{# } }}
+                    {{# if(self.isTeacher){ }}
+                        <div class="description">Преподватель ВПУ7</div>
+                    {{# }else{ }}
+                        <div class="description">{{= item.courseStr }}</div>
+                    {{# } }}
 
-                    </div>
-                </li>
-            {{# }) }}
-        </ul>
-    </div>
+                </div>
+            </li>
+        {{# }) }}
+    </ul>
 </div>
