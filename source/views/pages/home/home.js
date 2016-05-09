@@ -9,9 +9,6 @@ RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
     onNewExtras: function (data) {
         this.group = data.group;
     },
-    onEndRender: function () {
-        console.log('end rendfer');
-    },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
             dayId = +$item.attr('data-target');
@@ -24,7 +21,7 @@ RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
             extras: {name: self.group},
             success: function (resp) {
                 self.model.reset(resp, {silent: true});
-                self.getCurrentDay(2);
+                self.getCurrentDay();
             },
             error: function (err) {
                 console.log(err);
@@ -32,14 +29,15 @@ RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
         })
     },
     getCurrentDay: function (dayId) {
-        var data = this.model.toJSON();
+        var data = this.model.toJSON(),
+            date = dayId || moment().day();
 
         this.currentDay = _.filter(data, function(item){
-            return item.date.dayIndex == dayId
+            return item.date.dayIndex == date && item.subject
         });
 
         this.render(function () {
-            $('[data-target=' + dayId +']').addClass('active');
+            $('[data-target=' + date +']').addClass('active');
         });
 
     }

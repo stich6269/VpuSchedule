@@ -11,6 +11,17 @@ function  Parser() {
     this.linkPref = 'http://www.model.poltava.ua';
     this.groupNameMaxLen = 6;
     this.teacherNamePart = 3;
+
+    this.ringSchedle = {
+        0: {start: '8-00', end: '8-40'},
+        1: {start: '8-55', end: '9-35'},
+        2: {start: '9-50', end: '10-30'},
+        3: {start: '10-50', end: '11-30'},
+        4: {start: '11-45', end: '12-25'},
+        5: {start: '12-35', end: '13-15'},
+        6: {start: '14-00', end: '14-40'},
+        7: {start: '15-00', end: '15-40'}
+    }
 }
 
 //Create group collection
@@ -86,6 +97,7 @@ Parser.prototype.parseLessons = function($, groupName){
                     lesson = {
                         auditory: entities.decode($(currentRows[i+1]).html()),
                         number: rowCounter - 2,
+                        time: self.ringSchedle[rowCounter - 2],
                         group: groupName,
                         date: dayArr[Math.floor(i/2)],
                         dayId: Math.floor(i/2)

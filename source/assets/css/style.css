@@ -264,9 +264,10 @@ ul.days-list li.active {
     display: block;
     padding: 0;
     width: 100%;
-    background: #E2E2E2;
-    margin-bottom: 4px;
+    background: #FFFFFF;
+    margin-bottom: 5px;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
 
 ul.lessons-list {
@@ -279,10 +280,10 @@ ul.lessons-list {
 .time-wrapper {
     display: inline-block;
     width: 25%;
-    font-size: 20px;
+    font-size: 19px;
     padding: 10px;
     line-height: 25px;
-    border-right: 5px solid #F5B31F;
+    border-right: 5px solid #E77817;
     height: 70px;
     vertical-align: middle;
 }
@@ -302,13 +303,15 @@ ul.lessons-list {
     text-overflow: ellipsis;
     white-space: nowrap;
     height: 20px;
-    width: 100%;
+    width: 70%;
     vertical-align: middle;
 }
 
 .auditory {
     height: 20px;
     vertical-align: middle;
+    display: inline-block;
+    width: 60px;
 }
 
 .end-time {
@@ -318,6 +321,10 @@ ul.lessons-list {
 .subject {
     font-size: 15px;
     line-height: 22px;
+    height: 40px;
+    overflow: hidden;
+    width: 98%;
+    text-overflow: ellipsis;
 }
 
 .scroll-wrapper-list {
@@ -334,4 +341,36 @@ ul.lessons-list {
     height: 84%;
     width: 100%;
     background: white;
+}
+
+.auditory:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 20px;
+    margin-top: 2px;
+    float: left;
+    background-repeat: no-repeat;
+    background-image: url("../images/loc-icon.png");
+    background-size: 100%;
+}
+
+.teacher:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top:3px;
+    float: left;
+    background-repeat: no-repeat;
+    background-image: url("../images/teach-icon.png");
+    background-size: 70%;
+}
+
+.no-lessons {
+    display: block;
+    text-align: center;
+    margin-top: 60%;
+    font-size: 25px;
+    opacity: .3;
 }

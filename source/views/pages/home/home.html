@@ -50,20 +50,26 @@
 
 <div class="scroll-wrapper-lessons scroll-view">
     <ul class="lessons-list">
-        {{# _.each(this.currentDay, function(item){ }}
-        <li>
-            <div class="time-wrapper">
-                <div class="start-time">09:00</div>
-                <div class="end-time">10:00</div>
-            </div>
-            <div class="lesson-wrapper">
-                <div class="subject">{{= item.subject }}</div>
-                <div class="details">
-                    <div class="auditory">Аудит. {{= item.auditory }}</div>
-                    <div class="teacher">Преп. {{= item.teacher }}</div>
-                </div>
-            </div>
-        </li>
-        {{# }) }}
+        {{# if(this.currentDay){ }}
+            {{# if(this.currentDay.length){ }}
+                {{# _.each(this.currentDay, function(item){ }}
+                <li>
+                    <div class="time-wrapper">
+                        <div class="start-time">{{= item.time.start }}</div>
+                        <div class="end-time">{{= item.time.end }}</div>
+                    </div>
+                    <div class="lesson-wrapper">
+                        <div class="subject">{{= item.subject }}</div>
+                        <div class="details">
+                            <div class="auditory">{{= item.auditory }}</div>
+                            <div class="teacher">{{= item.teacher }}</div>
+                        </div>
+                    </div>
+                </li>
+                {{# }) }}
+            {{# }else{ }}
+                <div class="no-lessons">Нет лекций</div>
+            {{# } }}
+        {{# } }}
     </ul>
 </div>

@@ -26,7 +26,8 @@ var LessonSchema = new Schema({
     subject: {type: String, default: ''},
     teacher: {type: String, default: ''},
     group: {type: String, default: ''},
-    date: {type: Object}
+    date: {type: Object},
+    time: {type: Object}
 });
 
 //Exports
