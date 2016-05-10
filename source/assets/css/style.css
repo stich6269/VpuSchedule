@@ -297,7 +297,7 @@ ul.lessons-list {
     padding-left: 5px;
 }
 
-.teacher {
+.teacher-label {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -355,7 +355,7 @@ ul.lessons-list {
     background-size: 100%;
 }
 
-.teacher:before {
+.teacher-label:before {
     content: "";
     display: block;
     width: 20px;

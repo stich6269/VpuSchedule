@@ -6,3 +6,4 @@ Mongo Data Base
     2) Than open new console window and lunch
               cd C:\mongodb\bin
               mongo.
+
