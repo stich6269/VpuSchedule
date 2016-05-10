@@ -32,23 +32,34 @@ var dbName = 'VPU7Schedule',
     //When connected to db
     mongoose.connection.once('connected', function () {
         debug && console.log('DB connected...');
-        dropCollections(function () {
-            debug && console.log(collections.join(', ') + ' dropped...');
-            pageGrabber.getScheduleLinks();
-        })
+        pageGrabber.getScheduleLinks();
     });
     
     //Get new lists
     pageGrabber.once('got-links', function (result) {
         debug && console.log('Links parsed...');
-        saveCollection(result);
+        dropCollections(['teachers', 'groups'], function () {
+            debug && console.log('teachers and groups dropped...');
+            saveCollection(result, getLessons);
+        });
     });
+    
+    //Get Lessons
+    function getLessons() {
+        models.Group.find({}, function (err, result) {
+            pageGrabber.getLessons(result);
+        });
+    }
     
     //Get new lists
     pageGrabber.once('got-lessons', function (result) {
         debug && console.log('Lessons parsed...');
-        saveCollection(result, closeDb);
+        dropCollections(['lessons'], function () {
+            debug && console.log('lessons dropped...');
+            saveCollection(result, closeDb);
+        });
     });
+    
 
     //Save collections to db
     function saveCollection(collection, cb){
@@ -56,16 +67,12 @@ var dbName = 'VPU7Schedule',
             item.save(callback);
         }, function () {
             debug && console.log('Saved ' + collection.length + ' items...');
-            models.Group.find({}, function (err, result) {
-                pageGrabber.getLessons(result);
-                typeof cb == 'function' && cb();
-            })
+            typeof cb == 'function' && cb();
         });
     }
     
     //Drop all collections from db
-    function dropCollections(cb) {
-        collections = Object.keys(mongoose.connection.collections);
+    function dropCollections(collections, cb) {
         async.eachSeries(collections, function (item, callback) {
             mongoose.connection.collections[item].drop(callback);
         }, cb);

@@ -4,7 +4,13 @@
             <div class="menu-icon"></div>
         </div>
         <div class="col s4 center-align">
-            <h5>Today</h5>
+
+
+            {{# if(this.currentDay){ }}
+                <h5>Today</h5>
+            {{# } }}
+
+
         </div>
         <div class="col s4">
             <div class="add-note-icon"></div>
@@ -16,31 +22,31 @@
             <ul class="days-list">
                 <li class="lesson" data-target="1">
                     <div class="day-name">пн</div>
-                    <div class="day-date">13</div>
+                    <div class="day-date">{{= moment().day(1).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="2">
                     <div class="day-name">вт</div>
-                    <div class="day-date">14</div>
+                    <div class="day-date">{{= moment().day(2).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="3">
                     <div class="day-name">ср</div>
-                    <div class="day-date">15</div>
+                    <div class="day-date">{{= moment().day(3).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="4">
                     <div class="day-name">чт</div>
-                    <div class="day-date">16</div>
+                    <div class="day-date">{{= moment().day(4).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="5">
                     <div class="day-name">пт</div>
-                    <div class="day-date">17</div>
+                    <div class="day-date">{{= moment().day(5).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="6">
                     <div class="day-name">сб</div>
-                    <div class="day-date">18</div>
+                    <div class="day-date">{{= moment().day(6).format('DD') }}</div>
                 </li>
                 <li class="lesson" data-target="7">
                     <div class="day-name">вс</div>
-                    <div class="day-date">19</div>
+                    <div class="day-date">{{= moment().day(7).format('DD') }}</div>
                 </li>
             </ul>
         </div>
