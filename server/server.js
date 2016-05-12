@@ -39,7 +39,7 @@ function startServer() {
                 });
                 break;
             case '/get_schedule':
-                models.Lesson.find({group: data.name}, function (err, result) {
+                models.Lesson.find({groupName: data.name}, function (err, result) {
                     res.statusCode = 200;
                     res.end(JSON.stringify(result));
                 });

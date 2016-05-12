@@ -2,6 +2,7 @@
 var pageGrabber = require('./services/get_schedule/crawler');
 var mongoose = require('mongoose');
 var util = require("util");
+var _ = require('underscore');
 var async = require("async");
 var models = require('./models/models');
 
@@ -56,10 +57,46 @@ var dbName = 'VPU7Schedule',
         debug && console.log('Lessons parsed...');
         dropCollections(['lessons'], function () {
             debug && console.log('lessons dropped...');
-            saveCollection(result, closeDb);
+            setPointers(result, function (lessons) {
+                saveCollection(lessons, closeDb);
+            })
         });
     });
     
+
+    //Set pointers to group and teachers
+    function setPointers(collection, cb) {
+        var groupCollection,
+            teacherCollections;
+
+        models.Group.find({}, function (err, groups) {
+            groupCollection = _.map(groups, function (group) {
+                group.name = group.name.toLowerCase();
+                return group
+            });
+
+            models.Teacher.find({}, function (err, teachers) {
+                teacherCollections = _.map(teachers, function (teacher) {
+                    teacher.name = teacher.name.split(' ')[0].toLowerCase();
+                    return teacher
+                });
+                
+                _.each(collection, function (lesson) {
+                    var groupName = lesson.groupName.toLowerCase(),
+                        teacherName = lesson.teacherName.split(' ')[0].toLowerCase(),
+                        currentTeacher = _.findWhere(teachers, {name: teacherName}),
+                        currentGroup =  _.findWhere(groupCollection, {name: groupName});
+
+                    lesson.groupId = currentGroup ? currentGroup._id : '';
+                    lesson.teacherId = currentTeacher ? currentTeacher._id : '';
+                });
+
+                _.isFunction(cb) && cb(collection);
+            });
+        });
+
+       
+    }
 
     //Save collections to db
     function saveCollection(collection, cb){
@@ -67,7 +104,7 @@ var dbName = 'VPU7Schedule',
             item.save(callback);
         }, function () {
             debug && console.log('Saved ' + collection.length + ' items...');
-            typeof cb == 'function' && cb();
+            _.isFunction(cb) && cb();
         });
     }
     

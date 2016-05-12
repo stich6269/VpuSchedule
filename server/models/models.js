@@ -24,8 +24,10 @@ var LessonSchema = new Schema({
     auditory: {type: String, default: ''},
     type: {type: String, default: ''},
     subject: {type: String, default: ''},
-    teacher: {type: String, default: ''},
-    group: {type: String, default: ''},
+    teacherName: {type: String, default: ''},
+    teacherId: {type: String, default: ''},
+    groupName: {type: String, default: ''},
+    groupId: {type: String, default: ''},
     date: {type: Object},
     time: {type: Object}
 });

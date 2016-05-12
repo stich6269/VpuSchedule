@@ -98,7 +98,7 @@ Parser.prototype.parseLessons = function($, groupName){
                         auditory: entities.decode($(currentRows[i+1]).html()),
                         number: rowCounter - 2,
                         time: self.ringSchedle[rowCounter - 2],
-                        group: groupName,
+                        groupName: groupName,
                         date: dayArr[Math.floor(i/2)],
                         dayId: Math.floor(i/2)
                     };
@@ -140,7 +140,7 @@ Parser.prototype.parseLessonsAttr = function(lessonsStr){
 
     return{
         type: type,
-        teacher: teacher,
+        teacherName: teacher,
         subject: subject
     }
 
