@@ -6,5 +6,6 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
     },
     onStartAttach: function () {
         $('h5').html('Поиск');
+        $('ul.tabs').tabs();
     }
 }));
