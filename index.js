@@ -7,6 +7,7 @@
         "source/lib/itemslide.min.js",
 
         "source/services/network/network.js",
+        "source/services/transliterate/transliterate.js",
         "source/application/application.js",
 
         "source/models/session/session.js",

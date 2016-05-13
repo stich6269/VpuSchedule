@@ -4783,7 +4783,7 @@ small {
 }
 
 .tabs .tab a {
-  color: #CECECE;
+  color: rgba(206, 206, 206, 0.5);
   display: block;
   width: 100%;
   height: 100%;

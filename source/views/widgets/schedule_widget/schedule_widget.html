@@ -39,11 +39,11 @@
 
 
 <div class="scroll-wrapper-lessons scroll-view">
-    <ul class="lessons-list">
+    <ul id="staggered-test" class="lessons-list">
         {{# if(this.currentDay){ }}
             {{# if(this.currentDay.length){ }}
                 {{# _.each(this.currentDay, function(item){ }}
-                <li>
+                <li style="opacity: 0">
                     <div class="time-wrapper">
                         <div class="start-time">{{= item.time.start }}</div>
                         <div class="end-time">{{= item.time.end }}</div>

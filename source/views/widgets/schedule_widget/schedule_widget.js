@@ -43,6 +43,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         this.render(function () {
             $('[data-target=' + date +']').addClass('active');
             self.updateLabel(date);
+            Materialize.showStaggeredList('#staggered-test')
         });
     },
     updateLabel: function (dayId) {

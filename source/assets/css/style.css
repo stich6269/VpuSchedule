@@ -130,7 +130,7 @@ li.slide.active {
 }
 
 .slider-setup {
-    margin-top: 15%;
+    margin-top: 12%;
 }
 
 
@@ -495,12 +495,18 @@ input.search-input {
     background-color: white !important;
     border-radius: 3px !important;
     box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    height: 35px !important;
     font-size: 22px !important;
-    padding-left: 35px !important;
+    padding-left: 40px !important;
     box-sizing: border-box !important;
     color: rgba(0,0,0,.7);
     margin-bottom: 2px !important;
+    background-repeat: no-repeat;
+    background-image: url("../images/search-icon.png");
+    background-size: 20px;
+    background-position: 6px 6px;
 }
+
 
 .container-search {
     box-shadow: 0 0 10px rgba(0,0,0,.5);
@@ -517,6 +523,23 @@ input.search-input {
 
 li.tab.col.s6.custom-color {
     background: #456896;
-    font-size: 17px;
+    font-size: 15px;
     color: white;
+}
+
+.search-scroll-wrapper{
+    margin-top: -6%;
+    position: absolute;
+    background: white;
+    height: 76%;
+    width: 100%;
+}
+
+.item-info {
+    display: inline-block;
+    color: rgba(0,0,0,.6);
+    vertical-align: bottom;
+    line-height: 47px;
+    font-size: 20px;
+    margin-left: 10px;
 }
