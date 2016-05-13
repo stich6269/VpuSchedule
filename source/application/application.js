@@ -6,7 +6,7 @@ RAD.application(function (core) {
 
         var options = {
             container_id: '#screen',
-            content: "view.initialize",
+            content: "view.load_page",
             animation: 'none'
         };
 
@@ -15,7 +15,7 @@ RAD.application(function (core) {
         setTimeout(function () {
             var options = {
                 container_id: '#screen',
-                content: "view.setup",
+                content: "view.select_user_type_page",
                 animation: 'slide'
             };
 

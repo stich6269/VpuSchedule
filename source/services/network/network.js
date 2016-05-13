@@ -218,13 +218,12 @@
         get_schedule: function (options) {
             this.ajaxRequest({
                 type: 'get',
-                url: network.get('lessons') + '?name=' + options.extras.name,
+                url: network.get('lessons') + '?id=' + options.extras.id,
                 success: options.success,
                 error: options.error
             });
         },
-
-
+        
         onReceiveMsg: function (channel, data) {
             var parts = channel.split('.'),
                 method = parts[2];

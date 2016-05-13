@@ -1,14 +1,15 @@
-RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
-    url: 'source/views/pages/home/home.html',
+RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
+    url: 'source/views/widgets/schedule_widget/schedule_widget.html',
     model: RAD.models.Lessons,
     currentWeek: null,
     currentDay: null,
-    group: null,
+    account: null,
     events: {
         'click .lesson' : 'onLessons'
     },
-    onNewExtras: function (data) {
-        this.group = data.group;
+    onStartAttach: function () {
+        this.account = RAD.models.Session.get('currentSchedule');
+        this.getSchedule();
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
@@ -16,10 +17,11 @@ RAD.view("view.home", RAD.Blanks.ScrollableView.extend({
 
         this.getCurrentDay(dayId);
     },
-    onStartAttach: function () {
+    getSchedule: function () {
         var self = this;
+        
         this.publish('service.network.get_schedule', {
-            extras: {name: self.group},
+            extras: {id: self.account._id},
             success: function (resp) {
                 self.model.reset(resp, {silent: true});
                 self.getCurrentDay();

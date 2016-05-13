@@ -1,22 +1,6 @@
+{{# var data = RAD.models.Session.get('currentSchedule') }}
+
 <div class="container">
-    <div class="row navigation white-text">
-        <div class="col s4">
-            <div class="menu-icon"></div>
-        </div>
-        <div class="col s4 center-align">
-
-
-            {{# if(this.currentDay){ }}
-                <h5>Today</h5>
-            {{# } }}
-
-
-        </div>
-        <div class="col s4">
-            <div class="add-note-icon"></div>
-        </div>
-    </div>
-
     <div class="row navigation white-text">
         <div class="col s12">
             <ul class="days-list">
@@ -68,7 +52,7 @@
                         <div class="subject">{{= item.subject }}</div>
                         <div class="details">
                             <div class="auditory">{{= item.auditory }}</div>
-                            <div class="teacher-label">{{= item.teacher }}</div>
+                            <div class="teacher-label">{{= data.isTeacher ? item.groupName : item.teacherName  }}</div>
                         </div>
                     </div>
                 </li>

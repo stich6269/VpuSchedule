@@ -6589,7 +6589,7 @@ Picker.extend( 'pickadate', DatePicker )
 
         // Initialize
         var view = $(this);
-        // Don't double initialize.
+        // Don't double load_page.
         if (view.hasClass('initialized')) {
           return true;
         }

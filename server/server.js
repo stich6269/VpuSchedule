@@ -2,6 +2,7 @@
 var models = require('./models/models');
 var mongoose = require('mongoose');
 var http = require('http');
+var async = require("async");
 var url = require('url');
 
 //Setup and local variables
@@ -39,10 +40,17 @@ function startServer() {
                 });
                 break;
             case '/get_schedule':
-                models.Lesson.find({groupName: data.name}, function (err, result) {
-                    res.statusCode = 200;
-                    res.end(JSON.stringify(result));
+                models.Teacher.findById(data.id, function (err, result) {
+                    var key = result ? 'teacherId' : 'groupId',
+                        query = {};
+
+                    query[key] = data.id;
+                    models.Lesson.find(query, function (err, result) {
+                        res.statusCode = 200;
+                        res.end(JSON.stringify(result));
+                    });
                 });
+                
                 break;
             default:
                 res.statusCode = 404;

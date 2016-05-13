@@ -9,16 +9,20 @@
         "source/services/network/network.js",
         "source/application/application.js",
 
+        "source/models/session/session.js",
         "source/models/groups/groups.js",
         "source/models/teachers/teachers.js",
         "source/models/lessons/lessons.js",
 
-        "source/views/pages/home/home.js",
-        "source/views/pages/initialize/initialize.js",
-        "source/views/pages/setup/setup.js",
-        "source/views/pages/select_account/select_account.js",
+        "source/views/pages/home_page/home_page.js",
+        "source/views/pages/load_page/load_page.js",
+        "source/views/pages/select_user_type_page/select_user_type_page.js",
+        "source/views/pages/select_account_page/select_account_page.js",
         
-        "source/views/modals/confirm/confirm.js"
+        "source/views/modals/confirm/confirm.js",
+
+        "source/views/widgets/schedule_widget/schedule_widget.js",
+        "source/views/widgets/search_widget/search_widget.js"
     ];
     // #script_end#
     function onEndLoad() {
@@ -32,7 +36,7 @@
                 debug: false
             };
 
-        //initialize core by new application object
+        //load_page core by new application object
         core.initialize(application, coreOptions);
 
         //start
