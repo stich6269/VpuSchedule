@@ -21,7 +21,10 @@
         "source/views/pages/select_account_page/select_account_page.js",
         
         "source/views/modals/confirm/confirm.js",
+        "source/views/modals/alert/alert.js",
+        "source/views/modals/schedule_options/schedule_options.js",
 
+        "source/views/widgets/my_schedule_widget/my_schedule_widget.js",
         "source/views/widgets/schedule_widget/schedule_widget.js",
         "source/views/widgets/search_widget/search_widget.js"
     ];

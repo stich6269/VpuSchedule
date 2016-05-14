@@ -1,4 +1,4 @@
-RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
+RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
     url: 'source/views/widgets/my_schedule_widget/my_schedule_widget.html',
     model: RAD.models.Lessons,
     currentWeek: null,
@@ -7,16 +7,17 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     events: {
         'click .lesson' : 'onLessons'
     },
-    onNewExtras: function (data) {
-        this.account = data; 
-        this.getSchedule();
-    },
     onStartAttach: function () {
-        $('h5').html(this.account.name);
-        $('.add-note-icon').show();
-    },
-    onEndDetach: function () {
-        $('.add-note-icon').hide();
+        var session = RAD.models.Session.toJSON();
+        
+        this.account = {
+            link: session.link,
+            _id: session._id,
+            name: session.name,
+            isTeacher: RAD.models.Session.isTeacher()
+        };
+
+        this.getSchedule();
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
@@ -40,7 +41,8 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     },
     getCurrentDay: function (dayId) {
         var data = this.model.toJSON(),
-            date = dayId || moment().day();
+            date = dayId || moment().day(),
+            self = this;
 
         this.currentDay = _.filter(data, function(item){
             return item.date.dayIndex == date && item.subject
@@ -48,7 +50,19 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
 
         this.render(function () {
             $('[data-target=' + date +']').addClass('active');
+            self.updateLabel(date);
             Materialize.showStaggeredList('#staggered-test')
         });
+    },
+    updateLabel: function (dayId) {
+        var currentDate = moment().format('DD/MM/YYYY'),
+            newDate = moment().day(dayId).format('DD/MM/YYYY'),
+            $elem = $('h5');
+
+        if(currentDate == newDate){
+            $elem.html('Сегодня');
+        }else{
+            $elem.html(newDate);
+        }
     }
 }));

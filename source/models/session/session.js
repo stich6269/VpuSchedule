@@ -8,7 +8,7 @@
 
             lastScheduleUpdated: '',
             favoritesIds: [],
-            currentSchedule: {}
+            currentSchedule: null
         },
         isTeacher: function () {
             return this.get('userType') === 'teacher';

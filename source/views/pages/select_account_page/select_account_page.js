@@ -1,6 +1,5 @@
 RAD.view("view.select_account_page", RAD.Blanks.ScrollableView.extend({
     url: 'source/views/pages/select_account_page/select_account_page.html',
-    isTeacher: true,
     group: null,
     events: {
         'tap .item' : 'onItem'
@@ -19,9 +18,6 @@ RAD.view("view.select_account_page", RAD.Blanks.ScrollableView.extend({
             model = this.model.findWhere({_id: id}).toJSON();
         
         RAD.models.Session.set(model);
-        model.isTeacher =  RAD.models.Session.isTeacher();
-        RAD.models.Session.set({currentSchedule: model});
-        
         $('.item').toggleClass('active', false);
         value.toggleClass('active', true);
         

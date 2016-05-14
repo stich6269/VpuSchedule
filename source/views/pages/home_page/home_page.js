@@ -3,12 +3,13 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
     $menu: null,
     events: {
         'click .menu-icon' : 'onShowMenu',
-        'click .menu-item' : 'onMenuItem'
+        'click .menu-item' : 'onMenuItem',
+        'click .add-note-icon' : 'onOptions'
     },
     children: [
         {
             container_id: '#home-container',
-            content: "view.schedule_widget"
+            content: "view.my_schedule_widget"
         }
     ],
     onEndAttach: function () {
@@ -22,6 +23,16 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
     },
     onCloseMenu: function () {
         this.$menu.sideNav('hide');
+    },
+    onOptions: function (e) {
+        this.publish('navigation.popup.show', {
+            content: "view.schedule_options",
+            target: $(e.currentTarget),
+            width: 105,
+            height: 30,
+            gravity: 'left',
+            outsideClose: true
+        });
     },
     onMenuItem: function (e) {
         var $elem = $(e.currentTarget),
@@ -39,7 +50,7 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
             content: pageName,
             animation: 'slide'
         };
-
+        
         this.publish('navigation.show', options);
     },
     startMenu: function () {

@@ -14,7 +14,7 @@
                 <div class="info">
                     <div class="title">{{= item.name }}</div>
 
-                    {{# if(self.isTeacher){ }}
+                    {{# if(RAD.models.Session.isTeacher()){ }}
                         <div class="description">Преподватель ВПУ7</div>
                     {{# }else{ }}
                         <div class="description">{{= item.courseStr }}</div>

@@ -32,5 +32,14 @@ RAD.application(function (core) {
         core.publish('navigation.popup.show', options);
     };
 
+    app.showAlert = function (data) {
+        var options = {
+            content: "view.alert",
+            extras: data
+        };
+
+        core.publish('navigation.popup.show', options);
+    };
+    
     return app;
 }, true);

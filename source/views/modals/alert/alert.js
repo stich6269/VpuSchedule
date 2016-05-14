@@ -1,10 +1,9 @@
-RAD.view("view.confirm", RAD.Blanks.View.extend({
-    url: 'source/views/modals/confirm/confirm.html',
+RAD.view("view.alert", RAD.Blanks.View.extend({
+    url: 'source/views/modals/alert/alert.html',
     className: 'modal-view',
     options: null,
     events: {
-        'click .confirm': 'onConfirm',
-        'click .cancel': 'onCancel'
+        'click .button': 'onConfirm'
     },
     onNewExtras: function (data) {
         this.options = data;
@@ -12,10 +11,6 @@ RAD.view("view.confirm", RAD.Blanks.View.extend({
     },
     onConfirm: function () {
         _.isFunction(this.options.success) && this.options.success();
-        this.selfClose();
-    },
-    onCancel: function () {
-        _.isFunction(this.options.error) && this.options.error();
         this.selfClose();
     },
     onEndDetach: function () {

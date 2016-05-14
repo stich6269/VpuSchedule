@@ -6,6 +6,10 @@ body{
     height: 499px;
 }
 
+.full-size {
+    width: 100% !important;
+}
+
 ul.group-ul {
     display: block;
     width: 100%;
@@ -167,6 +171,7 @@ li.slide.active {
     margin-left: 10px;
     vertical-align: middle;
     color: white;
+    border-radius: 100%;
 }
 
 .info {
@@ -222,12 +227,12 @@ ul.scroll-list {
 /*Home page*/
 .menu-icon {
     display: inline-block;
-    width: 30px;
+    width: 40px;
     height: 35px;
-    margin-top: 5px;
+    margin-top: 11px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-    background-size: 95% 100%;
+    background-size: 60% 83%;
 }
 
 .row.navigation {
@@ -542,4 +547,26 @@ li.tab.col.s6.custom-color {
     line-height: 47px;
     font-size: 20px;
     margin-left: 10px;
+}
+
+.add-note-icon {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    margin-top: 16px;
+    background-image: url("../images/option.png");
+    background-repeat: no-repeat;
+    background-size: 23% 75%;
+}
+
+.option-container {
+    display: block;
+    background: white;
+    width: 108%;
+    margin-top: -6px;
+    font-size: 16px;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    padding: 3px 0px 0px 10px;
 }

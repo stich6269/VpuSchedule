@@ -20,7 +20,7 @@
 <div class="search-scroll-wrapper scroll-view"  data-template>
     <ul class="scroll-list">
         {{# var self = this; }}
-        {{# _.each(model, function(item){ }}
+        {{# _.each(this.sortedCollections, function(item){ }}
             <li class="item" data-target="{{= item._id }}">
                 <div class="image">{{= item.name[0] }}</div>
                 <div class="item-info">
