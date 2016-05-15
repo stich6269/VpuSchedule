@@ -26,36 +26,37 @@ function startServer() {
         data.method = req.method;
         res.setHeader('Content-Type', header);
 
-        switch (link){
-            case '/get_groups':
-                models.Group.find({}, function (err, result) {
-                    res.statusCode = 200;
-                    res.end(JSON.stringify(result));
-                });
-                break;
-            case '/get_teachers':
-                models.Teacher.find({}, function (err, result) {
-                    res.statusCode = 200;
-                    res.end(JSON.stringify(result));
-                });
-                break;
-            case '/get_schedule':
-                models.Teacher.findById(data.id, function (err, result) {
-                    var key = result ? 'teacherId' : 'groupId',
-                        query = {};
-
-                    query[key] = data.id;
-                    models.Lesson.find(query, function (err, result) {
+        setTimeout(function () {
+            switch (link){
+                case '/get_groups':
+                    models.Group.find({}, function (err, result) {
                         res.statusCode = 200;
                         res.end(JSON.stringify(result));
                     });
-                });
-                
-                break;
-            default:
-                res.statusCode = 404;
-                res.end('Service not found.');
-        }
+                    break;
+                case '/get_teachers':
+                    models.Teacher.find({}, function (err, result) {
+                        res.statusCode = 200;
+                        res.end(JSON.stringify(result));
+                    });
+                    break;
+                case '/get_schedule':
+                    models.Teacher.findById(data.id, function (err, result) {
+                        var key = result ? 'teacherId' : 'groupId',
+                            query = {};
+
+                        query[key] = data.id;
+                        models.Lesson.find(query, function (err, result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        });
+                    });
+                    break;
+                default:
+                    res.statusCode = 404;
+                    res.end('Service not found.');
+            }
+        }, 500);
     }).listen(3000);
 }
 

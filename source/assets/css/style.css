@@ -343,7 +343,7 @@ ul.lessons-list {
 
 .scroll-wrapper-lessons  {
     position: absolute;
-    height: 85%;
+    height: 83%;
     width: 100%;
     background: white;
 }
@@ -545,28 +545,84 @@ li.tab.col.s6.custom-color {
     color: rgba(0,0,0,.6);
     vertical-align: bottom;
     line-height: 47px;
-    font-size: 20px;
+    font-size: 17px;
     margin-left: 10px;
 }
 
 .add-note-icon {
     display: inline-block;
     width: 50px;
-    height: 30px;
-    margin-top: 16px;
+    height: 50px;
     background-image: url("../images/option.png");
     background-repeat: no-repeat;
-    background-size: 23% 75%;
+    background-size: 25% 50%;
+    background-position: 0%;
 }
 
 .option-container {
     display: block;
     background: white;
     width: 108%;
-    margin-top: -6px;
     font-size: 16px;
     height: 100%;
     border-radius: 3px;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
     padding: 3px 0px 0px 10px;
+}
+
+.favorites-container {
+    position: absolute;
+    background: white;
+    height: 91%;
+    width: 100%;
+}
+
+.delete-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    background-image: url("../images/delete-icon.png");
+    background-repeat: no-repeat;
+    background-size: 55% 55%;
+    background-position: 50%;
+    opacity: .4;
+}
+
+.setup-container {
+    display: block;
+    width: 100%;
+    height: 90%;
+    background: white;
+    padding-top: 5%;
+}
+
+div#spinner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0,0,0,.9);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+.spinner-wrapper {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    background-image: url("../images/loading.gif");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }

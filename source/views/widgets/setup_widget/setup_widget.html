@@ -1,0 +1,20 @@
+{{# var self =  this; }}
+<div class="setup-container">
+    <div class="container">
+        <div class="input-field col s12">
+            <select>
+                <optgroup label="Группы">
+                    {{# _.each(this.groups, function(item){ }}
+                        <option value="{{= item._id }}">{{= item.name }}</option>
+                    {{# }) }}
+                </optgroup>
+                <optgroup label="Преподаватели">
+                    {{# _.each(this.teachers, function(item){ }}
+                        <option value="{{= item._id }}">{{= item.name }}</option>
+                    {{# }) }}
+                </optgroup>
+            </select>
+            <label>Выберите Ваш аккаунт:</label>
+        </div>
+    </div>
+</div>

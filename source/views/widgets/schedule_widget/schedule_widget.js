@@ -8,7 +8,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         'click .lesson' : 'onLessons'
     },
     onNewExtras: function (data) {
-        this.account = data; 
+        this.account = data;
         this.getSchedule();
     },
     onStartAttach: function () {
@@ -34,7 +34,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
                 self.getCurrentDay();
             },
             error: function (err) {
-                console.log(err);
+                RAD.application.showAlert({message: err.responseText});
             }
         })
     },

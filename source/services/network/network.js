@@ -80,7 +80,7 @@
                     lessons: LESSONS_LIST
                 });
             }
-        }),
+        });
         network = new Network;
 
 
@@ -91,13 +91,13 @@
         loadingShow: function () {
             this.requestCounter++;
             if (this.requestCounter === 1) {
-                //window.document.getElementById("spinner").style.display = "block";
+                window.document.getElementById("spinner").style.display = "block";
             }
         },
         loadingHide: function () {
             this.requestCounter--;
             if (this.requestCounter <= 0) {
-                //window.document.getElementById("spinner").style.display = "none";
+                window.document.getElementById("spinner").style.display = "none";
                 this.requestCounter = 0;
             }
         },

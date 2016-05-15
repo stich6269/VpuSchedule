@@ -1,0 +1,11 @@
+<div class="favorites-container scroll-view">
+    <ul class="scroll-list">
+        {{# _.each(this.sortedCollections, function(item){ }}
+            <li class="item" data-target="{{= item._id }}">
+                <div class="image">{{= item.name[0] }}</div>
+                <div class="item-info">{{= item.name }}</div>
+                <div class="delete-button" data-target="{{= item._id }}"></div>
+            </li>
+        {{# }) }}
+    </ul>
+</div>

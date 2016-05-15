@@ -16,7 +16,8 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
             name: session.name,
             isTeacher: RAD.models.Session.isTeacher()
         };
-
+    },
+    onEndAttach: function () {
         this.getSchedule();
     },
     onLessons: function (e) {
@@ -35,7 +36,7 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
                 self.getCurrentDay();
             },
             error: function (err) {
-                console.log(err);
+                RAD.application.showAlert({message: err.responseText});
             }
         })
     },
