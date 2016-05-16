@@ -20,10 +20,15 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
     onEndAttach: function () {
         this.getSchedule();
     },
+    onEndDetach: function () {
+        this.model.reset([]);
+    },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
-            dayId = +$item.attr('data-target');
+            dayId = +$item.attr('data-target'),
+            $items = this.$('.lesson');
 
+        $items.toggleClass('active', false);
         this.getCurrentDay(dayId);
     },
     getSchedule: function () {
@@ -34,9 +39,6 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
             success: function (resp) {
                 self.model.reset(resp, {silent: true});
                 self.getCurrentDay();
-            },
-            error: function (err) {
-                RAD.application.showAlert({message: err.responseText});
             }
         })
     },

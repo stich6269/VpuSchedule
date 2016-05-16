@@ -2,8 +2,10 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
     url: 'source/views/widgets/setup_widget/setup_widget.html',
     groups: null,
     teachers: null,
+    isTeacher: null,
     events: {
-        'change select' : 'onSelect'
+        'change #account' : 'onAccount',
+        'change #type' : 'onType'
     },
     onStartAttach: function () {
         this.groups = RAD.models.Groups.toJSON();
@@ -11,19 +13,33 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
         $('h5').html('Настройки');
         this.render(function () {
             $('select').material_select();
+            $('.select-dropdown').val('Выбрать:');
         });
     },
-    onSelect: function () {
-        var currentValue = $('.active').find('span').html(),
-            teachers = RAD.models.Teachers.toJSON(),
-            groups = RAD.models.Groups.toJSON(),
-            foundValue = _.findWhere(teachers, {name: currentValue}) || 
-                _.findWhere(groups, {name: currentValue});
+    onType: function (e) {
+        var currentValue = $('.active').find('span').html();
 
-        foundValue.userType = _.findWhere(teachers, {name: currentValue}) ? 'teacher':'student';
+        if(currentValue == 'Преподаватель' || currentValue == 'Студент'){
+            this.isTeacher = currentValue === 'Преподаватель';
+            this.render(function () {
+                $('#account').removeAttr('disabled');
+                $('select').material_select();
+            });
+
+        }
+    },
+    onAccount: function (e) {
+        var collection, foundValue,
+            currentValue = $('.active').find('span').html();
+
+        collection = this.isTeacher ? this.teachers : this.groups;
+        foundValue = _.findWhere(collection, {name: currentValue});
+        foundValue.userType = this.isTeacher ? 'teacher':'student';
+
         RAD.models.Session.set(foundValue);
+
         $('#name').html(foundValue.name)
-            .toggleClass('teacher-name', RAD.models.Session.isTeacher())
-            .toggleClass('group-name', !RAD.models.Session.isTeacher())
+            .toggleClass('teacher-name', this.isTeacher)
+            .toggleClass('group-name', !this.isTeacher)
     }
 }));

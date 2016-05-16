@@ -600,7 +600,7 @@ li.tab.col.s6.custom-color {
     padding-top: 5%;
 }
 
-div#spinner {
+.spinner {
     display: block;
     width: 100%;
     height: 100%;
@@ -625,4 +625,12 @@ div#spinner {
     background-size: 70%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.without-margin {
+    margin: 0 !important;
 }

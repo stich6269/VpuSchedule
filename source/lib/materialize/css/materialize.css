@@ -3258,7 +3258,7 @@ nav ul a span.badge {
   height: 4px;
   display: block;
   width: 100%;
-  background-color: #acece6;
+  background-color: #FBFBFB;
   border-radius: 2px;
   margin: 0.5rem 0 1rem 0;
   overflow: hidden;
@@ -3274,7 +3274,7 @@ nav ul a span.badge {
 }
 
 .progress .indeterminate {
-  background-color: #26a69a;
+  background-color: #E77817;
 }
 
 .progress .indeterminate:before {
@@ -5784,6 +5784,7 @@ textarea.materialize-textarea + label:after {
 .input-field {
   position: relative;
   margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .input-field label {
@@ -6372,7 +6373,7 @@ select {
 
 .select-wrapper + label {
   position: absolute;
-  top: -20px;
+  top: -10px;
   font-size: 1rem;
 }
 

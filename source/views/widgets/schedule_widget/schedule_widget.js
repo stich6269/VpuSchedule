@@ -9,6 +9,8 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     },
     onNewExtras: function (data) {
         this.account = data;
+    },
+    onEndAttach: function () {
         this.getSchedule();
     },
     onStartAttach: function () {
@@ -16,6 +18,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         $('.add-note-icon').show();
     },
     onEndDetach: function () {
+        this.model.reset([]);
         $('.add-note-icon').hide();
     },
     onLessons: function (e) {

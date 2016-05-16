@@ -47,10 +47,7 @@
                 message = json._ErrorMessages;
             }
 
-            RAD.core.publish('application.alert', {
-                message: message,
-                title: 'Warning'
-            });
+            RAD.application.showAlert({message:message});
         }
 
 
@@ -67,7 +64,7 @@
         return json;
     }
 
-    var BASE_URL = 'http://127.0.0.1:3000/',
+    var BASE_URL = 'http://vpuapp.herokuapp.com/',
         GROUPS_LIST = BASE_URL + 'get_groups',
         LESSONS_LIST = BASE_URL + 'get_schedule',
         TEACHERS_LIST = BASE_URL + 'get_teachers';
@@ -91,13 +88,13 @@
         loadingShow: function () {
             this.requestCounter++;
             if (this.requestCounter === 1) {
-                window.document.getElementById("spinner").style.display = "block";
+                $('#load-element').toggleClass('hidden', false);
             }
         },
         loadingHide: function () {
             this.requestCounter--;
             if (this.requestCounter <= 0) {
-                window.document.getElementById("spinner").style.display = "none";
+                $('#load-element').toggleClass('hidden', true);
                 this.requestCounter = 0;
             }
         },
@@ -188,12 +185,13 @@
 
             if (!connectionStatus.connected) {
                 alertOpt.message = "Connect to the Internet and try again";
-                alertOpt.title = 'Internet Error'
             } else if (statusMsg[statusCode]) {
                 alertOpt.message = statusMsg[statusCode];
             } else {
                 alertOpt.message = 'Connect to the Internet and try again';
             }
+
+            RAD.application.showAlert({message:alertOpt.message});
         },
 
 
@@ -202,7 +200,8 @@
                 type: 'get',
                 url: network.get('groups'),
                 success: options.success,
-                error: options.error
+                error: options.error,
+                needErrorMsg: true
             });
         },
 
@@ -211,7 +210,8 @@
                 type: 'get',
                 url: network.get('teachers'),
                 success: options.success,
-                error: options.error
+                error: options.error,
+                needErrorMsg: true
             });
         },
 
@@ -220,7 +220,8 @@
                 type: 'get',
                 url: network.get('lessons') + '?id=' + options.extras.id,
                 success: options.success,
-                error: options.error
+                error: options.error,
+                needErrorMsg: true
             });
         },
         

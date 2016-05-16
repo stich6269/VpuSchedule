@@ -17,9 +17,6 @@ RAD.view("view.select_user_type_page", RAD.Blanks.View.extend({
                         self.openSelectAccountPage();
                     }
                 });
-            },
-            error: function (err) {
-                RAD.application.showAlert({message: err.responseText});
             }
         });
     },
