@@ -1,0 +1,19 @@
+{
+    "name": "VpuSchedule",
+    "application": null,
+    "libs": {},
+    "view": {
+        "home": "\\source\\views\\home",
+        "initialize": "\\source\\views\\initialize",
+        "setup": "\\source\\views\\setup",
+        "select_account": "\\source\\views\\select_account"
+    },
+    "model": {},
+    "service": {},
+    "screen": {},
+    "external": {},
+    "links": {},
+    "collection": {
+        "groups": "\\source\\models\\groups"
+    }
+}

@@ -1,0 +1,32 @@
+<div class="container-search">
+    <div class="search-wrapper">
+        <div class="search-icon"></div>
+        <input type="text" class="search-input">
+        <div class="clear-icon"></div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 full-size">
+            <ul class="tabs">
+                <li data-target="teachers" class="tab col s6 custom-color"><a class="active">Учителя</a></li>
+                <li data-target="student" class="tab col s6 custom-color"><a>Группы</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="search-scroll-wrapper scroll-view"  data-template>
+    <ul class="scroll-list">
+        {{# var self = this; }}
+        {{# _.each(this.sortedCollections, function(item){ }}
+            <li class="item" data-target="{{= item._id }}">
+                <div class="image">{{= item.name[0] }}</div>
+                <div class="item-info">
+                    {{= item.name }}
+                </div>
+            </li>
+        {{# }) }}
+    </ul>
+</div>

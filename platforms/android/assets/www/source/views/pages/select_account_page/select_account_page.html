@@ -1,0 +1,31 @@
+
+<div class="container">
+    <div class="center-block center white-text">
+        <p class="text-help light-blue darken-4">Теперь найдите рассписание которое вы хотите видеть в приложении:</p>
+    </div>
+</div>
+
+<div class="scroll-wrapper scroll-view">
+    <ul class="scroll-list">
+        {{# var self = this; }}
+        {{# _.each(model, function(item){ }}
+            <li class="item" id="{{= item._id }}">
+                <div class="image">{{= item.name[0] }}</div>
+                <div class="info">
+                    <div class="title">{{= item.name }}</div>
+
+                    {{# if(RAD.models.Session.isTeacher()){ }}
+                        <div class="description">Преподватель ВПУ7</div>
+                    {{# }else{ }}
+                        <div class="description">{{= item.courseStr }}</div>
+                    {{# } }}
+
+                </div>
+            </li>
+        {{# }) }}
+    </ul>
+</div>
+
+<div id="load-element" class="spinner hidden">
+    <div class="spinner-wrapper"></div>
+</div>
