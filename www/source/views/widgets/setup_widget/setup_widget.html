@@ -1,0 +1,28 @@
+{{# var self =  this; }}
+<div class="simple-container">
+    <div class="container">
+        <div class="input-field col s12">
+            <select id="type">
+                <option disabled selected>Выбрать:</option>
+                <option>Студент</option>
+                <option>Преподаватель</option>
+            </select>
+            <label>Тип пользователя:</label>
+        </div>
+        <div class="input-field col s12" data-template>
+            <select id="account" disabled>
+                <option disabled selected>Выбрать:</option>
+                {{# if (this.isTeacher){ }}
+                    {{# _.each(this.teachers, function(item){ }}
+                        <option>{{= item.name }}</option>
+                    {{# }) }}
+                {{# }else{ }}
+                    {{# _.each(this.groups, function(item){ }}
+                        <option>{{= item.name }}</option>
+                    {{# }) }}
+                {{# } }}
+            </select>
+            <label>Ваш новый аккаунт:</label>
+        </div>
+    </div>
+</div>

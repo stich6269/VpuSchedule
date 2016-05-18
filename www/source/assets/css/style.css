@@ -1,0 +1,651 @@
+body{
+    background: #456896;
+}
+
+.group-container.scroll-view {
+    height: 499px;
+}
+
+.full-size {
+    width: 100% !important;
+}
+
+ul.group-ul {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.group-ul li {
+    display: block;
+    padding: 10px 0 10px 25px;
+    margin: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.logo-wrapper {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin: -120px 0 0 -100px;
+    background: url("../images/vpu7-logo.png") no-repeat 50% 50%;
+    background-size: initial;
+}
+
+/*select_user_type_page screen*/
+#scrolling {
+    overflow: hidden;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+li {
+    float: left;
+    transition: opacity .1s linear;
+}
+
+.image-for-slider {
+    width: 170px;
+    height: 170px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+ul#slider-list {
+    width: 600px;
+}
+
+ul#slider-list .itemslide-active {
+    display: block;
+    opacity: 1;
+    transition: opacity .5s cubic-bezier(0.4, 0, 1, 1);
+}
+
+ul#slider-list li {
+    opacity: 0;
+    padding: 10px;
+}
+
+.image-for-slider.student{
+    background-image: url("../images/student-icon.png");
+}
+
+.image-for-slider.teacher{
+    background-image: url("../images/teacher-icon.png");
+}
+
+.text-wrap {
+    =: absolute
+    left: 50px;
+    font-size: 23px;
+}
+
+.center-block.center.bind-bottom {
+    position: absolute;
+    left: 50%;
+    margin-left: -110px;
+    bottom: 5%;
+}
+
+button.btn.long {width: 225px;}
+
+p.text-help {
+    margin: 5% 0 5% 0;
+    padding: 5%;
+    width: 112%;
+    width: 112%;
+    margin-left: -6%;
+    font-size: 15px;
+}
+
+ul#slider-control {
+    height: 20px;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    bottom: 14%;
+}
+
+li.slide {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #013763;
+    margin-right: 10px;
+    border-radius: 100%;
+}
+
+li.slide.active {
+    background: #FDAE5F;
+    transition: background .3s linear;
+}
+
+.slider-setup {
+    margin-top: 12%;
+}
+
+
+/*Select group*/
+.scroll-wrapper {
+    margin-top: -5%;
+    position: absolute;
+    height: 86%;
+    width: 100%;
+}
+
+.scroll-list li {
+    display: block;
+    width: 100%;
+    color: #FFFFFF;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.scroll-list li.active {
+    background: rgb(255, 150, 16);
+}
+
+
+.image {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: rgb(255, 150, 16);
+    text-align: center;
+    padding-top: 3px;
+    font-size: 30px;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: white;
+    border-radius: 100%;
+}
+
+.info {
+    display: inline-block;
+    text-align: left;
+    margin-left: 5px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.title {
+    font-size: 17px;
+    line-height: 28px;
+}
+
+.description {
+    line-height: 22px;
+}
+
+ul.scroll-list {
+    width: 100%;
+}
+
+
+
+/*Confirm modal*/
+.modal-view {
+    background: rgba(0,0,0,.2);
+}
+
+.horisontal-center {
+    margin-top: 70% !important;
+}
+
+.message-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.buttons-container {
+    display: block;
+    font-size: 0;
+    width: 100%;
+}
+
+.button {
+    width: 50%;
+    font-size: 16px;
+    text-align: center
+}
+
+
+/*Home page*/
+.menu-icon {
+    display: inline-block;
+    width: 40px;
+    height: 35px;
+    margin-top: 11px;
+    background-image: url("../images/menu-icon.png");
+    background-repeat: no-repeat;
+    background-size: 60% 83%;
+}
+
+.row.navigation {
+    margin-bottom: 0px;
+    height: 45px;
+}
+
+ul.days-list {
+    width: 96%;
+    margin-left: -3%;
+}
+
+ul.days-list li {
+    width: 14.28%;
+    text-align: center;
+    text-transform: uppercase;
+    opacity: .6;
+}
+
+.day-name {
+    font-size: 12px;
+}
+
+ul.days-list li.active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.schedule-wrapper {
+    background: white;
+}
+
+.lessons-list li {
+    display: block;
+    padding: 0;
+    width: 100%;
+    background: #FFFFFF;
+    margin-bottom: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+ul.lessons-list {
+    width: 94%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 3%;
+}
+
+.time-wrapper {
+    display: inline-block;
+    width: 25%;
+    font-size: 19px;
+    padding: 10px;
+    line-height: 25px;
+    border-right: 5px solid #E77817;
+    height: 70px;
+    vertical-align: middle;
+}
+
+.lesson-wrapper {
+    display: inline-block;
+    width: 73%;
+    text-align: left;
+    height: 65px;
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.teacher-label {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
+    width: 70%;
+    vertical-align: middle;
+}
+
+.auditory {
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    width: 60px;
+}
+
+.end-time {
+    opacity: .6;
+}
+
+.subject {
+    font-size: 15px;
+    line-height: 22px;
+    height: 40px;
+    overflow: hidden;
+    width: 98%;
+    text-overflow: ellipsis;
+}
+
+.scroll-wrapper-list {
+    height: 303px;
+}
+
+.details {
+    opacity: .6;
+}
+
+
+.scroll-wrapper-lessons  {
+    position: absolute;
+    height: 85%;
+    width: 100%;
+    background: white;
+}
+
+.auditory:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 20px;
+    margin-top: 2px;
+    float: left;
+    background-repeat: no-repeat;
+    background-image: url("../images/loc-icon.png");
+    background-size: 100%;
+}
+
+.teacher-label:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top:3px;
+    float: left;
+    background-repeat: no-repeat;
+    background-image: url("../images/teach-icon.png");
+    background-size: 70%;
+}
+
+.no-lessons {
+    display: block;
+    text-align: center;
+    margin-top: 60%;
+    font-size: 25px;
+    opacity: .3;
+}
+
+
+/*Menu*/
+li.menu-head-wrapper {
+    height: 100px;
+}
+
+.user-icon {
+    display: inline-block;
+    width: 65px;
+    height: 65px;
+    margin-left: 10px;
+    margin-top: 15px;
+    vertical-align: middle;
+    background-size: cover;
+}
+
+
+.user-icon.student {
+    background-image: url("../images/student-icon.png");
+}
+
+.user-icon.teacher {
+    background-image: url("../images/teacher-icon.png");
+}
+
+.user-type {
+    border: 1px solid #000;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+}
+
+.info-container {
+    display: inline-block;
+    width: 65%;
+    height: 65px;
+    margin-top: 10px;
+    padding-top: 20px;
+    /* opacity: .6; */
+    padding-left: 13px;
+    vertical-align: middle;
+}
+
+.group-name {
+    font-size: 40px;
+    line-height: 27px;
+    opacity: .6;
+}
+
+.teacher-name {
+    font-size: 20px;
+    line-height: 20px;
+    opacity: .6;
+}
+
+
+li.menu-head-wrapper {
+    background: #183D6F;
+}
+
+li.menu-item {
+    color: #000;
+    padding: 15px 0px 15px 20px;
+    font-size: 15px;
+}
+
+.menu-item:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    opacity: .5;
+    float: left;
+    background-repeat: no-repeat;
+}
+
+.menu-item.home:before {
+    background-image: url("../images/calendar-icon.png");
+    background-size: 90%;
+}
+
+.menu-item.search:before {
+    background-image: url("../images/search-icon.png");
+    background-size: 90%;
+}
+
+.menu-item.favorites:before {
+    background-image: url("../images/favorite-icon.png");
+    background-size: 90%;
+}
+
+.menu-item.setup:before {
+    background-image: url("../images/setup-icon.png");
+    background-size: 90%;
+}
+
+
+.menu-item.about:before {
+    background-image: url("../images/info-icon.png");
+    background-size: 98%;
+}
+
+
+/*Home parent page*/
+div#home-container {
+    overflow: hidden;
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/*Search widget*/
+input.search-input {
+    background-color: white !important;
+    border-radius: 3px !important;
+    box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    height: 35px !important;
+    font-size: 22px !important;
+    padding-left: 40px !important;
+    box-sizing: border-box !important;
+    color: rgba(0,0,0,.7);
+    margin-bottom: 2px !important;
+    background-repeat: no-repeat;
+    background-image: url("../images/search-icon.png");
+    background-size: 20px;
+    background-position: 6px 6px;
+}
+
+
+.container-search {
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.search-wrapper {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.col.s12.full-size {
+    padding: 0;
+}
+
+li.tab.col.s6.custom-color {
+    background: #456896;
+    font-size: 15px;
+    color: white;
+}
+
+.search-scroll-wrapper{
+    margin-top: -5%;
+    position: absolute;
+    background: white;
+    height: 79%;
+    width: 100%;
+}
+
+.item-info {
+    display: inline-block;
+    color: rgba(0,0,0,.6);
+    vertical-align: bottom;
+    line-height: 47px;
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.add-note-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url("../images/option.png");
+    background-repeat: no-repeat;
+    background-size: 25% 50%;
+    background-position: 0%;
+}
+
+.option-container {
+    display: block;
+    background: white;
+    width: 108%;
+    font-size: 16px;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    padding: 3px 0px 0px 10px;
+}
+
+.simple-container {
+    position: absolute;
+    background: white;
+    height: 92%;
+    width: 100%;
+}
+
+.delete-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    background-image: url("../images/delete-icon.png");
+    background-repeat: no-repeat;
+    background-size: 55% 55%;
+    background-position: 50%;
+    opacity: .4;
+}
+
+.spinner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0,0,0,.9);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+.spinner-wrapper {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    background-image: url("../images/loading.gif");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.without-margin {
+    margin: 0 !important;
+}
+
+ul.app-info {
+    width: 90%;
+    margin-top: 75px;
+}
+
+ul.app-info li {
+    display: block !important;
+    width: 90%;
+}
+
+.screen-container {
+    display: block;
+    width: 170px;
+    height: 300px;
+    background: aqua;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    background-image: url("../images/screen.png");
+    background-size: contain;
+    box-shadow: -5px 5px 10px rgba(0,0,0,.2);
+}
