@@ -6744,10 +6744,10 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .drag-target {
-  height: 100%;
-  width: 10px;
+  height: 95%;
+  width: 50px;
   position: fixed;
-  top: 0;
+  top: 7%;
   z-index: 998;
 }
 
