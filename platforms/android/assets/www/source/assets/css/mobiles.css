@@ -1,0 +1,152 @@
+/*Styles to 320*480 resolution*/
+@media  (min-width: 100px) and (max-width: 321px) {
+    p.text-help {
+        font-size: 13px;
+    }
+
+    h4 {
+        font-size: 2.0rem;
+    }
+
+    .slider-setup {
+        margin-top: 0;
+    }
+
+    .scroll-wrapper {
+        margin-top: -4.5%;
+        height: 85%;
+    }
+
+    .drag-target {
+      height: 80%;
+      top: 20%;
+    }
+
+    .search-scroll-wrapper{
+        height: 81%;
+    }
+
+    .simple-container {
+        height: 90%;
+    }
+
+    .scroll-wrapper-lessons  {
+        height: 82%;
+    }
+}
+
+
+
+/*Styles to 360*640 resolution*/
+@media (min-width: 321px) and (max-width: 361px) {
+    .slider-setup {
+        margin-top: 12%;
+    }
+
+    .drag-target {
+      height: 85%;
+      top: 15%;
+    }
+
+    .search-scroll-wrapper {
+        height: 84%;
+    }
+}
+
+
+/*Styles to 480*800 resolution*/
+@media (min-width: 361px) and (max-width: 481px) {
+     .slider-setup {
+        margin-top: 30%;
+    }
+
+    .scroll-wrapper-lessons {
+        height: 88%;
+    }
+
+    .drag-target {
+      height: 88%;
+      top: 12%;
+    }
+
+    .search-scroll-wrapper {
+        height: 87%;
+    }
+
+    .simple-container {
+        height: 94%;
+    }
+}
+
+
+/*Styles to 640*960 resolution*/
+@media (min-width: 481px) and (max-width: 641px) {
+     .slider-setup {
+        margin-top: 30%;
+    }
+
+    p.text-help {
+        width: 118%;
+        margin-left: -9%;
+        font-size: 15px;
+    }
+
+    .scroll-wrapper {
+        height: 90%;
+    }
+
+    .scroll-wrapper-lessons {
+        height: 90%;
+    }
+
+    .drag-target {
+      height: 88%;
+      top: 12%;
+    }
+
+    .search-scroll-wrapper {
+        height: 90%;
+    }
+
+    .simple-container {
+        height: 95%;
+    }
+}
+
+
+
+
+
+/*Styles to 768*1024 resolution*/
+@media (min-width: 641px) {
+     .slider-setup {
+        margin-top: 30%;
+    }
+
+    p.text-help {
+        width: 118%;
+        margin-left: -9%;
+        font-size: 15px;
+    }
+
+    .scroll-wrapper {
+        height: 90%;
+    }
+
+    .scroll-wrapper-lessons {
+        height: 90%;
+    }
+
+    .drag-target {
+      height: 88%;
+      top: 12%;
+    }
+
+    .search-scroll-wrapper {
+        height: 90%;
+    }
+
+    .simple-container {
+        height: 95%;
+    }
+}

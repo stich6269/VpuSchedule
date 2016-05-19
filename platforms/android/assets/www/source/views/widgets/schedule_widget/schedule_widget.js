@@ -53,7 +53,6 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
 
         this.render(function () {
             $('[data-target=' + date +']').addClass('active');
-            Materialize.showStaggeredList('#staggered-test')
         });
     }
 }));
