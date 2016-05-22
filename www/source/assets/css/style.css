@@ -228,12 +228,12 @@ ul.scroll-list {
 .menu-icon {
     display: inline-block;
     margin-left: -15px;
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-    background-size: 55% 66%;
-    background-position: 80% 65%;
+    background-size: 45% 65%;
+    background-position: 60% 40%;
 }
 
 .row.navigation {
