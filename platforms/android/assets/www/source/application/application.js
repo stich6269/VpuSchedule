@@ -3,6 +3,7 @@ RAD.application(function (core) {
 
     app.start = function () {
         core.startService();
+        var self = this;
 
         var options = {
             container_id: '#screen',
@@ -10,9 +11,35 @@ RAD.application(function (core) {
             animation: 'none'
         };
 
-       core.publish('navigation.show', options);
-
+        core.publish('navigation.show', options);
         setTimeout(function () {
+            self.selectStartPage();
+        }, 1000);
+
+    };
+
+
+    app.selectStartPage = function () {
+        var appData = RAD.models.Session.toJSON();
+
+        if(appData.userType && appData.name){
+            app.showHomepage()
+        }else{
+            app.startInitialPages();
+        }
+    };
+
+    app.showHomepage = function () {
+        var options = {
+            container_id: '#screen',
+            content: "view.home_page",
+            animation: 'slide'
+        };
+
+        core.publish('navigation.show', options);
+    };
+
+    app.startInitialPages = function () {
             var options = {
                 container_id: '#screen',
                 content: "view.select_user_type_page",
@@ -20,7 +47,6 @@ RAD.application(function (core) {
             };
 
             core.publish('navigation.show', options);
-        }, 1000)
     };
 
     app.showConfirm = function (data) {
