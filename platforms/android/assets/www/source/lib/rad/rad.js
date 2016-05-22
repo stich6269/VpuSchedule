@@ -2202,7 +2202,12 @@
                 switch (routerType) {
                 case 'native':
                     core.window.onpopstate = function (event) {
-                        router.onPopState(event);
+                        if($('.modal-view').length){
+                            RAD.core.publish('navigation.popup.close', {content: 'view.alert'});
+                            RAD.core.publish('navigation.popup.close', {content: 'view.confirm'});
+                        }else{
+                            router.onPopState(event);
+                        }
                     };
                     break;
                 case 'hashbang':

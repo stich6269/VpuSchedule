@@ -2,22 +2,10 @@ RAD.application(function (core) {
     var app = this;
 
     app.start = function () {
-        core.startService();
         var self = this;
-
-        var options = {
-            container_id: '#screen',
-            content: "view.load_page",
-            animation: 'none'
-        };
-
-        core.publish('navigation.show', options);
-        setTimeout(function () {
-            self.selectStartPage();
-        }, 1000);
-
+        core.startService();
+        self.selectStartPage();
     };
-
 
     app.selectStartPage = function () {
         var appData = RAD.models.Session.toJSON();

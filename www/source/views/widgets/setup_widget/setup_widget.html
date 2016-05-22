@@ -1,28 +1,34 @@
 {{# var self =  this; }}
 <div class="simple-container">
-    <div class="container">
+    <div class="container margin-top">
         <div class="input-field col s12">
             <select id="type">
-                <option disabled selected>Выбрать:</option>
-                <option>Студент</option>
-                <option>Преподаватель</option>
+                <option>Выбрать:</option>
+                <option {{ this.isTeacher ? '':'selected' }}>Студент</option>
+                <option {{ this.isTeacher ? 'selected':'' }}>Преподаватель</option>
             </select>
             <label>Тип пользователя:</label>
         </div>
-        <div class="input-field col s12" data-template>
-            <select id="account" disabled>
-                <option disabled selected>Выбрать:</option>
+        <div class="input-field col s12">
+            <select id="account">
+                <option>Выбрать:</option>
                 {{# if (this.isTeacher){ }}
                     {{# _.each(this.teachers, function(item){ }}
-                        <option>{{= item.name }}</option>
+                        <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
                     {{# }) }}
                 {{# }else{ }}
                     {{# _.each(this.groups, function(item){ }}
-                        <option>{{= item.name }}</option>
+                        <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
                     {{# }) }}
                 {{# } }}
             </select>
             <label>Ваш новый аккаунт:</label>
         </div>
+
+
+        <div class="center-block center bind-bottom">
+            <button class="btn long waves-effect  light-blue darken-4" type="submit" name="action">Сохранить</button>
+        </div>
+
     </div>
 </div>

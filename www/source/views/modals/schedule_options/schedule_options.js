@@ -8,12 +8,13 @@ RAD.view("view.schedule_options", RAD.Blanks.View.extend({
             newId = data.currentSchedule._id,
             favorites = data.favoritesIds;
 
-
         if(favorites.indexOf(newId) == -1){
             favorites.push(newId);
-            RAD.models.Session.set({favoritesIds: favorites});
-            RAD.application.showAlert({
-                message: 'Это рассписание успешно добавлено в список ваших избранных.'
+            RAD.application.showConfirm({
+                message: 'Добавить это рассписание в избранное?',
+                success: function () {
+                    RAD.models.Session.set({favoritesIds: favorites});
+                }
             })
         }else{
             RAD.application.showAlert({

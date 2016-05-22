@@ -4,7 +4,8 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
     events: {
         'click .menu-icon' : 'onShowMenu',
         'click .menu-item' : 'onMenuItem',
-        'click .add-note-icon' : 'onOptions'
+        'click .add-note-icon' : 'onOptions',
+        'click .menu-head-wrapper' : 'onMySchedule'
     },
     children: [
         {
@@ -12,6 +13,16 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
             content: "view.my_schedule_widget"
         }
     ],
+    onMySchedule: function (e) {
+        var options = {
+            container_id: '#home-container',
+            content: 'view.my_schedule_widget',
+            animation: 'slide'
+        };
+
+        this.onCloseMenu();
+        this.publish('navigation.show', options);
+    },
     onEndAttach: function () {
         this.$menu = this.$('.button-collapse');
         this.$('nav').show();

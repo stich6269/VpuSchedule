@@ -44,7 +44,7 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
     },
     getCurrentDay: function (dayId) {
         var data = this.model.toJSON(),
-            date = dayId || moment().day(),
+            date = dayId || moment().isoWeekday(),
             self = this;
 
         this.currentDay = _.filter(data, function(item){

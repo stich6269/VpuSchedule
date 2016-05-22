@@ -16,7 +16,6 @@
         "source/models/lessons/lessons.js",
 
         "source/views/pages/home_page/home_page.js",
-        "source/views/pages/load_page/load_page.js",
         "source/views/pages/select_user_type_page/select_user_type_page.js",
         "source/views/pages/select_account_page/select_account_page.js",
         
@@ -46,9 +45,16 @@
         //load_page core by new application object
         core.initialize(application, coreOptions);
 
+
         //start
         application.start();
     }
 
-    window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+    if(window.cordova){
+        document.addEventListener("deviceready", function () {
+            window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+        }, false);
+    }else{
+        window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+    }
 }(document, window));
