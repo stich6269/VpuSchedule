@@ -232,8 +232,8 @@ ul.scroll-list {
     height: 55px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-    background-size: 45% 65%;
-    background-position: 60% 40%;
+    background-size: 45% 50%;
+    background-position: 55% 40%;
 }
 
 .row.navigation {
