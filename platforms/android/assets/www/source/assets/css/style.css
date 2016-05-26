@@ -233,8 +233,13 @@ ul.scroll-list {
     height: 50px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
+<<<<<<< HEAD
+    background-size: 45% 50%;
+    background-position: 55% 40%;
+=======
     background-size: 25px 32px;
     background-position: 28px 8px;
+>>>>>>> VpuSchedule
 }
 
 .row.navigation {
