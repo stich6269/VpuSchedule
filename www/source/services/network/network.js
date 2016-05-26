@@ -112,7 +112,7 @@
                 type: Obj.type || 'GET',
                 url: url,
                 crossDomain: true,
-                timeout: Obj.longTimeout ? 90000 : 15000,
+                timeout: 10000,
                 data: data,
                 headers: '',
                 contentType: Obj.contentType || "application/json",
@@ -153,30 +153,30 @@
                 var networkState = navigator.connection.type,
                     states = {};
 
-                states[Connection.UNKNOWN] = 'Unknown connection';
-                states[Connection.ETHERNET] = 'Ethernet connection';
-                states[Connection.WIFI] = 'WiFi connection';
-                states[Connection.CELL_2G] = 'Cell 2G connection';
-                states[Connection.CELL_3G] = 'Cell 3G connection';
-                states[Connection.CELL_4G] = 'Cell 4G connection';
-                states[Connection.CELL] = 'Cell generic connection';
-                states[Connection.NONE] = 'No network connection';
+                states[Connection.UNKNOWN] = 'Неизвестное соединение';
+                states[Connection.ETHERNET] = 'Интернет соединение';
+                states[Connection.WIFI] = 'WiFi соединение';
+                states[Connection.CELL_2G] = '2G соединение';
+                states[Connection.CELL_3G] = '3G соединение';
+                states[Connection.CELL_4G] = '4G соединение';
+                states[Connection.CELL] = 'Генерация соединения';
+                states[Connection.NONE] = 'Интернет соединение отсутствует';
 
                 status.connected = networkState !== Connection.NONE;
                 status.type = states[networkState];
             } else {
                 status.connected = true;
-                status.type = 'Unknown connection';
+                status.type = 'Неизвестное соединение.';
             }
             return status;
         },
 
         showError: function (statusCode) {
             var statusMsg = {
-                    0: 'Server is currently unavailable. Please try again later',
-                    400: 'Request was aborted',
-                    401: 'Your session is timed out. Please, login again',
-                    500: 'Internal Server Error'
+                    0: 'Сервер временно недоступен. Пожалуйста попробуйте позже.',
+                    400: 'Запрос отменен.',
+                    401: 'Ваша сессия истекла. Авторизуйтесь заново.',
+                    500: 'На сервере произошла ошибка. Мы уже работаем наж ее устранением.'
                 },
                 connectionStatus = this.checkConnection(),
                 alertOpt = {
@@ -184,11 +184,11 @@
                 };
 
             if (!connectionStatus.connected) {
-                alertOpt.message = "Connect to the Internet and try again";
+                alertOpt.message = "При загрузке данных произошла ошибка. Проверьте Ваше пожключение к сети."
             } else if (statusMsg[statusCode]) {
                 alertOpt.message = statusMsg[statusCode];
             } else {
-                alertOpt.message = 'Connect to the Internet and try again';
+                alertOpt.message = "При загрузке данных произошла ошибка. Проверьте Ваше пожключение к сети."
             }
 
             RAD.application.showAlert({message:alertOpt.message});

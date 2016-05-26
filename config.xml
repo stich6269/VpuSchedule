@@ -19,6 +19,13 @@
     <platform name="android">
         <!-- you can use any density that exists in the Android project -->
         <allow-intent href="market:*" />
+
+        <splash src="www/res/screen/background.png" density="port-hdpi"/>
+        <splash src="www/res/screen/background.png" density="port-ldpi"/>
+        <splash src="www/res/screen/background.png" density="port-mdpi"/>
+        <splash src="www/res/screen/background.png" density="port-xhdpi"/>
+        <preference name="FadeSplashScreen" value="false"/>
+
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

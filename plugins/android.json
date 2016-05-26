@@ -9,6 +9,12 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.schedule.com"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.schedule.com"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.schedule.com"
         }
     },
     "dependent_plugins": {}

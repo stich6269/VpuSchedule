@@ -19,6 +19,9 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
         this.sortedCollections = this.models;
         this.render();
     },
+    onEndDetach: function () {
+        this.$('.search-input').val('');
+    },
     onItem: function (e) {
         var $elem = $(e.currentTarget),
             id = $elem.attr('data-target'),

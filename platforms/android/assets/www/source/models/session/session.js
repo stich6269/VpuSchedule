@@ -11,7 +11,6 @@
             currentSchedule: null
         },
         initialize: function () {
-            console.log('initialize session model');
             var localData = localStorage.getItem('Session'),
                 data = JSON.parse(localData);
 

@@ -45,9 +45,16 @@
         //load_page core by new application object
         core.initialize(application, coreOptions);
 
+
         //start
         application.start();
     }
 
-    window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+    if(window.cordova){
+        document.addEventListener("deviceready", function () {
+            window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+        }, false);
+    }else{
+        window.RAD.scriptLoader.loadScripts(scripts, onEndLoad);
+    }
 }(document, window));

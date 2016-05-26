@@ -5,7 +5,19 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
     <allow-intent href="market:*" />
+    <splash density="port-hdpi" src="www/res/screen/background.png" />
+    <splash density="port-ldpi" src="www/res/screen/background.png" />
+    <splash density="port-mdpi" src="www/res/screen/background.png" />
+    <splash density="port-xhdpi" src="www/res/screen/background.png" />
+    <preference name="FadeSplashScreen" value="false" />
     <name>VPUSchedule</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

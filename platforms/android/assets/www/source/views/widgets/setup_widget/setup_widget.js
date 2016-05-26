@@ -3,42 +3,54 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
     groups: null,
     teachers: null,
     isTeacher: null,
+    foundValue: null,
     events: {
         'change #account' : 'onAccount',
-        'change #type' : 'onType'
+        'change #type' : 'onType',
+        'click .btn' : 'onSubmit'
     },
     onStartAttach: function () {
         this.groups = RAD.models.Groups.toJSON();
         this.teachers = RAD.models.Teachers.toJSON();
+        this.isTeacher = RAD.models.Session.isTeacher();
+
         $('h5').html('Настройки');
-        this.render(function () {
-            $('select').material_select();
-            $('.select-dropdown').val('Выбрать:');
-        });
+        this.render(this.activateSelect);
     },
     onType: function (e) {
         var currentValue = $('.active').find('span').html();
 
         if(currentValue == 'Преподаватель' || currentValue == 'Студент'){
             this.isTeacher = currentValue === 'Преподаватель';
-            this.render(function () {
-                $('#account').removeAttr('disabled');
-                $('select').material_select();
-            });
-
+            this.render(this.activateSelect);
         }
     },
     onAccount: function (e) {
-        var collection, foundValue,
+        var collection,
             currentValue = $('.active').find('span').html();
 
         collection = this.isTeacher ? this.teachers : this.groups;
-        foundValue = _.findWhere(collection, {name: currentValue});
-        foundValue.userType = this.isTeacher ? 'teacher':'student';
+        this.foundValue = _.findWhere(collection, {name: currentValue});
+        this.foundValue.userType = this.isTeacher ? 'teacher':'student';
+    },
+    onSubmit: function () {
+        var self = this;
 
-        RAD.models.Session.set(foundValue);
-
-        $('#name').html(foundValue.name)
+        RAD.application.showConfirm({
+            message: 'Сохранить новые настройки для приложения?',
+            success: function () {
+                if(self.foundValue){
+                    RAD.models.Session.set(self.foundValue);
+                    self.changeMenuName();
+                }
+            }
+        })
+    },
+    activateSelect: function () {
+        $('select').material_select();
+    },
+    changeMenuName: function () {
+        $('#name').html(this.foundValue.name)
             .toggleClass('teacher-name', this.isTeacher)
             .toggleClass('group-name', !this.isTeacher)
     }

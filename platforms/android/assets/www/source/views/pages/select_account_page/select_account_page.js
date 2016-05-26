@@ -21,18 +21,12 @@ RAD.view("view.select_account_page", RAD.Blanks.ScrollableView.extend({
         $('.item').toggleClass('active', false);
         value.toggleClass('active', true);
         
-        setTimeout(function () {
-            RAD.application.showConfirm({
-                message: 'Вы выбрали аккаунт ' + model.name +
-                '. Желаете чтоб приложение запомнило Ваш выбор?',
-                success: function () {
-                    self.openHomePage();
-                },
-                error: function () {
-                    console.log('error cb');
-                }
-            })
-        }, 300)
+        RAD.application.showConfirm({
+            message: 'Сщхранить выбранные настройки для этого приложения?',
+            success: function () {
+                self.openHomePage();
+            }
+        })
     },
     openHomePage: function () {
         var options = {

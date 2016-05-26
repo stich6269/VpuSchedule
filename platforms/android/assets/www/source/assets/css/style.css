@@ -227,13 +227,14 @@ ul.scroll-list {
 /*Home page*/
 .menu-icon {
     display: inline-block;
+    position: absolute;
     margin-left: -15px;
-    width: 55px;
-    height: 55px;
+    width: 90px;
+    height: 50px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-    background-size: 45% 65%;
-    background-position: 60% 40%;
+    background-size: 25px 32px;
+    background-position: 28px 8px;
 }
 
 .row.navigation {
@@ -279,7 +280,7 @@ ul.days-list li.active {
 ul.lessons-list {
     width: 94%;
     margin-top: 5px;
-    margin-bottom: 10px;
+    padding-bottom: 20px;
     margin-left: 3%;
 }
 
@@ -318,6 +319,8 @@ ul.lessons-list {
     vertical-align: middle;
     display: inline-block;
     width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .end-time {
@@ -454,6 +457,7 @@ li.menu-item {
     height: 20px;
     margin-right: 10px;
     opacity: .5;
+    color: #2D2D2D;
     float: left;
     background-repeat: no-repeat;
 }
@@ -469,7 +473,7 @@ li.menu-item {
 }
 
 .menu-item.favorites:before {
-    background-image: url("../images/favorite-icon.png");
+    background-image: url("../images/favorite-icon-black.png");
     background-size: 90%;
 }
 
@@ -537,7 +541,7 @@ li.tab.col.s6.custom-color {
     margin-top: 0;
     position: absolute;
     background: white;
-    height: 79%;
+    height: 82%;
     width: 100%;
 }
 
@@ -553,17 +557,18 @@ li.tab.col.s6.custom-color {
 .add-note-icon {
     display: inline-block;
     width: 50px;
+    margin-left: -25px;
     height: 50px;
-    background-image: url("../images/option.png");
+    background-image: url("../images/share.png");
     background-repeat: no-repeat;
-    background-size: 25% 50%;
-    background-position: 0%;
+    background-size: 37% 40%;
+    background-position: 25% 50%;
 }
 
 .option-container {
     display: block;
     background: white;
-    width: 108%;
+    width: 135px;
     font-size: 16px;
     height: 100%;
     border-radius: 3px;
@@ -637,7 +642,7 @@ ul.app-info {
 
 ul.app-info li {
     display: block !important;
-    width: 90%;
+    width: 100%;
     font-size: 16px;
 }
 
@@ -652,4 +657,8 @@ ul.app-info li {
     background-image: url("../images/screen.png");
     background-size: contain;
     box-shadow: -5px 5px 10px rgba(0,0,0,.2);
+}
+
+.container.margin-top {
+    padding-top: 5%;
 }
