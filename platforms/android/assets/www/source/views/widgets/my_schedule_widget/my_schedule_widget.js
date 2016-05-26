@@ -7,21 +7,19 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
     events: {
         'click .lesson' : 'onLessons'
     },
-    onStartAttach: function () {
-        var session = RAD.models.Session.toJSON();
-        
-        this.account = {
-            link: session.link,
-            _id: session._id,
-            name: session.name,
-            isTeacher: RAD.models.Session.isTeacher()
-        };
+    onReceiveMsg: function (msg) {
+        var method = msg.split('.')[2];
+        this[method] && this[method]();
     },
-    onEndAttach: function () {
+    onStartAttach: function () {
+        var session = RAD.models.Session;
+
+        this.account = _.pick(session.toJSON(), 'link', '_id', 'name');
+        this.account.isTeacher = session.isTeacher();
         this.getSchedule();
     },
     onEndDetach: function () {
-        this.model.reset([]);
+        this.renderRequest = true;
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
@@ -33,7 +31,7 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
     },
     getSchedule: function () {
         var self = this;
-        
+
         this.publish('service.network.get_schedule', {
             extras: {id: self.account._id},
             success: function (resp) {
@@ -57,14 +55,9 @@ RAD.view("view.my_schedule_widget", RAD.Blanks.ScrollableView.extend({
         });
     },
     updateLabel: function (dayId) {
-        var currentDate = moment().format('DD/MM/YYYY'),
-            newDate = moment().day(dayId).format('DD/MM/YYYY'),
+        var newDate = moment().day(dayId).format('DD/MM/YYYY'),
             $elem = $('h5');
 
-        if(currentDate == newDate){
-            $elem.html('Сегодня');
-        }else{
-            $elem.html(newDate);
-        }
+        $elem.html(newDate);
     }
 }));

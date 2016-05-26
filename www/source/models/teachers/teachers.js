@@ -20,18 +20,7 @@
     }, true);
 
     RAD.model('Teachers', Backbone.Collection.extend({
-        model: Teacher,
-        initialize: function () {
-            var localData = localStorage.getItem('Teachers'),
-                data = JSON.parse(localData);
-            
-            localData && this.reset(data);
-        },
-        reset: function () {
-            Backbone.Collection.prototype.reset.apply(this, arguments);
-            var dataToLocal = JSON.stringify(this.toJSON());
-            localStorage.setItem('Teachers', dataToLocal);
-        }
+        model: Teacher
     }), true);
 })();
 

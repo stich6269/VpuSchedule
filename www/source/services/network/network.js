@@ -112,7 +112,7 @@
                 type: Obj.type || 'GET',
                 url: url,
                 crossDomain: true,
-                timeout: 5000,
+                timeout: 10000,
                 data: data,
                 headers: '',
                 contentType: Obj.contentType || "application/json",

@@ -20,6 +20,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     onEndDetach: function () {
         this.model.reset([]);
         $('.add-note-icon').hide();
+        this.renderRequest = true;
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),

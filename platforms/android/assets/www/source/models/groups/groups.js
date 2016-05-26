@@ -29,18 +29,7 @@
     }, true);
 
     RAD.model('Groups', Backbone.Collection.extend({
-        model: Group,
-        initialize: function () {
-            var localData = localStorage.getItem('Groups'),
-                data = JSON.parse(localData);
-            
-            localData && this.reset(data);
-        },
-        reset: function () {
-            Backbone.Collection.prototype.reset.apply(this, arguments);
-            var dataToLocal = JSON.stringify(this.toJSON());
-            localStorage.setItem('Groups', dataToLocal);
-        }
+        model: Group
     }), true);
 })();
 
