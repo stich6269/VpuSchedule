@@ -178,12 +178,11 @@ li.slide.active {
     display: inline-block;
     text-align: left;
     margin-left: 5px;
-    height: 50px;
     vertical-align: middle;
 }
 
 .title {
-    font-size: 17px;
+    font-size: 22px;
     line-height: 28px;
 }
 
@@ -233,13 +232,15 @@ ul.scroll-list {
     height: 50px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-<<<<<<< HEAD
+<<<<<<<
+    HEAD
     background-size: 45% 50%;
-    background-position: 55% 40%;
+    background-size: 26% 62%;
 =======
     background-size: 25px 32px;
     background-position: 28px 8px;
->>>>>>> VpuSchedule
+>>>>>>>
+    VpuSchedule;
 }
 
 .row.navigation {

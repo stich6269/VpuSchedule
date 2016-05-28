@@ -8,7 +8,8 @@
             subject: '',
             teacher: '',
             group: '',
-            date: {}
+            date: {},
+            created: null
         }
     }, true);
 

@@ -4,39 +4,25 @@ RAD.application(function (core) {
     app.start = function () {
         var self = this;
         core.startService();
+        RAD.Storage.initialize();
         self.selectStartPage();
     };
 
     app.selectStartPage = function () {
-        var appData = RAD.models.Session.toJSON();
-
-        if(appData.userType && appData.name){
-            app.showHomepage()
-        }else{
-            app.startInitialPages();
-        }
+        var startPage = RAD.Storage.firstStart ? 'view.select_user_type_page' : 'view.home_page';
+        app.showPage(startPage);
     };
 
-    app.showHomepage = function () {
+    app.showPage = function (pageName) {
         var options = {
             container_id: '#screen',
-            content: "view.home_page",
+            content: pageName,
             animation: 'slide'
         };
 
         core.publish('navigation.show', options);
     };
-
-    app.startInitialPages = function () {
-            var options = {
-                container_id: '#screen',
-                content: "view.select_user_type_page",
-                animation: 'slide'
-            };
-
-            core.publish('navigation.show', options);
-    };
-
+    
     app.showConfirm = function (data) {
         var options = {
             content: "view.confirm",
@@ -47,6 +33,7 @@ RAD.application(function (core) {
     };
 
     app.showAlert = function (data) {
+        console.log(data)
         var options = {
             content: "view.alert",
             extras: data

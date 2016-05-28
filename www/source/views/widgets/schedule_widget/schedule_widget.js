@@ -1,5 +1,5 @@
 RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
-    url: 'source/views/widgets/my_schedule_widget/my_schedule_widget.html',
+    url: 'source/views/widgets/schedule_widget/schedule_widget.html',
     model: RAD.models.Lessons,
     currentWeek: null,
     currentDay: null,
@@ -8,12 +8,18 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         'click .lesson' : 'onLessons'
     },
     onNewExtras: function (data) {
-        this.account = data;
+        if(data) return this.account = data;
+        this.account = RAD.models.Session.pick('_id', 'name', 'student');
     },
     onEndAttach: function () {
-        this.getSchedule();
+        var cb = _.bind(this.getCurrentDay, this);
+        RAD.Storage.updateSchedule(this.account._id, cb);
     },
     onStartAttach: function () {
+        if(!this.account) {
+            this.account = RAD.models.Session.pick('_id', 'name', 'student');
+        }
+
         $('h5').html(this.account.name);
         $('.add-note-icon').show();
     },
@@ -29,20 +35,6 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
 
         $items.toggleClass('active', false);
         this.getCurrentDay(dayId);
-    },
-    getSchedule: function () {
-        var self = this;
-        
-        this.publish('service.network.get_schedule', {
-            extras: {id: self.account._id},
-            success: function (resp) {
-                self.model.reset(resp, {silent: true});
-                self.getCurrentDay();
-            },
-            error: function (err) {
-                RAD.application.showAlert({message: err.responseText});
-            }
-        })
     },
     getCurrentDay: function (dayId) {
         var data = this.model.toJSON(),
