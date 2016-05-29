@@ -5,7 +5,7 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
         'click .menu-icon' : 'onShowMenu',
         'click .menu-item' : 'onMenuItem',
         'click .add-note-icon' : 'onOptions',
-        'click .menu-head-wrapper' : 'onMySchedule'
+        'click .menu-head-wrapper' : 'showSchedule'
     },
     children: [
         {
@@ -13,15 +13,6 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
             content: "view.schedule_widget"
         }
     ],
-    onMySchedule: function (e) {
-        var self = this,
-            session = RAD.models.Session.toJSON(),
-            extras = _.pick(session, '_id', 'name', 'student');
-
-        this.onCloseMenu(function () {
-            self.showPage('view.schedule_widget', extras);
-        });
-    },
     onEndAttach: function () {
         this.$menu = this.$('.button-collapse');
         this.$('nav').show();
@@ -40,16 +31,36 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
     onMenuItem: function (e) {
         var $elem = $(e.currentTarget),
             view = $elem.attr('data-target'),
+            scView = 'view.schedule_widget',
             $items = $('.menu-item'),
             self = this;
         
         $items.toggleClass('active', false);
         $elem.toggleClass('active', true);
+        
+        if(view == scView ){
+            this.showSchedule();
+        } else{
+            this.onCloseMenu(function () {
+                self.showPage(view);
+            });
+        }
+    },
+    showSchedule: function () {
+        var scView = 'view.schedule_widget',
+            schedule = RAD.core.getView(scView),
+            self = this;
 
-        this.onCloseMenu(function () {
-            self.showPage(view);
-        });
-
+        if(schedule.mScroll){
+            this.onCloseMenu(function () {
+                schedule.account = null;
+                schedule.showSchedule()
+            });
+        } else{
+            this.onCloseMenu(function () {
+                self.showPage(scView);
+            });
+        }
     },
     showPage: function (pageName, extras) {
         var options = {

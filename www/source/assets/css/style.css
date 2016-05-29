@@ -1,5 +1,5 @@
 body{
-    background: #456896;
+    background: #124acc;
 }
 
 .group-container.scroll-view {
@@ -447,7 +447,7 @@ li.menu-head-wrapper {
 
 
 li.menu-head-wrapper {
-    background: #183D6F;
+    background: #124acc;
 }
 
 li.menu-item {
@@ -501,6 +501,7 @@ div#home-container {
     position: absolute;
     top: 55px;
     width: 100%;
+    background: #124acc;
     height: 100%;
 }
 

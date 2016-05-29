@@ -10,6 +10,9 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
         'click .item' : 'onItem'
     },
     onStartAttach: function () {
+        RAD.Storage.updateList(_.bind(this.updateCollection, this));
+    },
+    updateCollection: function () {
         var groups = RAD.models.Groups.toJSON(),
             teachers = RAD.models.Teachers.toJSON();
 
@@ -27,8 +30,6 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
             id = $elem.attr('data-target'),
             model = _.findWhere(this.models, {_id: id});
 
-        model.isTeacher = !(!!model.course);
-        RAD.models.Session.set({currentSchedule: model});
         this.openSchedule(model);
     },
     openSchedule: function (extras) {
@@ -38,7 +39,7 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
             animation: 'slide',
             extras: extras
         };
-
+        
         this.publish('navigation.show', options);
     },
     onSearch: function (e) {

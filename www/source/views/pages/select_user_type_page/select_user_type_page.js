@@ -6,14 +6,13 @@ RAD.view("view.select_user_type_page", RAD.Blanks.View.extend({
         'click .btn' : 'onSubmit'
     },
     onSubmit: function(){
-        var currentPosition = this.carousel.getActiveIndex(),
-            userType = !currentPosition ? 'student' : 'teacher';
+        var currentPosition = this.carousel.getActiveIndex();
         
+        RAD.Storage.updateList(_.bind(this.openSelectAccountPage, this));
         RAD.models.Session.set({
             student: !(!!currentPosition),
             teacher: !!currentPosition
         });
-        RAD.Storage.updateList(_.bind(this.openSelectAccountPage, this));
     },
     openSelectAccountPage: function () {
         var options = {

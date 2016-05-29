@@ -48,11 +48,14 @@ RAD.namespace('Storage', {
         });
     },
     updateSchedule: function (id, callback) {
-        var schedule = this.getLocalStore(id);
+        var schedule = this.getLocalStore(id),
+            currentDates;
+        
         if (!schedule) return this.loadSchedule(id, callback);
 
         this.Lessons.reset(schedule, {silent: true});
-        typeof callback == 'function' && callback();
+        currentDates = this.getWeekDates();
+        typeof callback == 'function' && callback(currentDates);
     },
     loadSchedule: function (id, callback) {
         var self = this;
@@ -66,6 +69,28 @@ RAD.namespace('Storage', {
                 }
             }
         })
+    },
+    getWeekDates: function () {
+        var dates = _.pluck(this.Lessons.toJSON(), 'date'),
+            str = _.map(dates, function(item){return JSON.stringify(item)}),
+            parsedDates =  _.map(_.uniq(str), function(item){return JSON.parse(item)}),
+            sortArr =  _(parsedDates).sortBy('dayIndex'),
+            week = ['пн','вт','ср','чт','пт','сб','вс'];
+
+        for (var i = 1; 7 > i; i++) {
+            if(!sortArr[i]) {
+                var lastDate = sortArr[i-1].local,
+                    count = 1;
+
+                sortArr.push({
+                    dayIndex: i,
+                    dayStr: week[i],
+                    local: moment(lastDate).add(count++, 'days')
+                });
+            }
+        }
+
+        return sortArr;
     },
     getLocalStore: function (storeKey) {
         var data = localStorage.getItem(storeKey) || 'null';
