@@ -10,12 +10,7 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
         'click .btn' : 'onSubmit'
     },
     onStartAttach: function () {
-        this.groups = RAD.models.Groups.toJSON();
-        this.teachers = RAD.models.Teachers.toJSON();
-        this.isTeacher = RAD.models.Session.isTeacher();
-
-        $('h5').html('Настройки');
-        this.render(this.activateSelect);
+        this.updateView();
     },
     onType: function (e) {
         var currentValue = $('.active').find('span').html();
@@ -31,7 +26,6 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
 
         collection = this.isTeacher ? this.teachers : this.groups;
         this.foundValue = _.findWhere(collection, {name: currentValue});
-        this.foundValue.userType = this.isTeacher ? 'teacher':'student';
     },
     onSubmit: function () {
         var self = this;
@@ -53,5 +47,16 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
         $('#name').html(this.foundValue.name)
             .toggleClass('teacher-name', this.isTeacher)
             .toggleClass('group-name', !this.isTeacher)
+    },
+    updateCollection: function () {
+        this.groups = RAD.models.Groups.toJSON();
+        this.teachers = RAD.models.Teachers.toJSON();
+        this.isTeacher = RAD.models.Session.get('teacher');
+
+        $('h5').html('Настройки');
+        this.render(this.activateSelect);
+    },
+    updateView: function () {
+        RAD.Storage.updateList(_.bind(this.updateCollection, this));
     }
 }));

@@ -73,5 +73,8 @@ RAD.view("view.favorites_widget", RAD.Blanks.ScrollableView.extend({
         };
 
         this.publish('navigation.show', options);
+    },
+    updateView: function () {
+        this.getFavoritesList();
     }
 }));

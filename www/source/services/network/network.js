@@ -20,7 +20,7 @@
             this.requestCounter++;
             if (this.requestCounter === 1) {
                 $('#load-element').toggleClass('hidden', false);
-            }
+        }
         },
         loadingHide: function () {
             this.requestCounter--;

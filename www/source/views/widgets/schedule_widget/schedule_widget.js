@@ -1,4 +1,4 @@
-RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
+RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
     url: 'source/views/widgets/schedule_widget/schedule_widget.html',
     model: RAD.models.Lessons,
     weekDates: null,
@@ -10,32 +10,41 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     onNewExtras: function (data) {
         var session = RAD.models.Session;
         this.account = data || session.pick('_id', 'name', 'teacher');
+        if(this.account) session.set({currentSchedule: this.account._id})
     },
     onStartRender: function () {
         if(!this.account) this.onNewExtras();
     },
+    onEndRender: function () {
+        var cb = _.bind(this.showSchedule, this),
+            id = this.account._id;
+
+        setTimeout(function () {
+            RAD.ptr.initialize('wrapper', 'pullDown', function () {
+                RAD.Storage.loadSchedule(id, cb);
+            })
+        }, 0)
+    },
     onStartAttach: function () {
         this.showSchedule();
-    },
-    showSchedule: function () {
-        var cb = _.bind(this.getDates, this),
-            session = RAD.models.Session;
-        
-        if(!this.account)  this.account = session.pick('_id', 'name', 'teacher');
-        RAD.Storage.updateSchedule(this.account._id, cb);
-
-        $('.add-note-icon').show();
-        $('h5').html(this.account.name);
-    },
-    getDates: function (currentDates) {
-        this.weekDates = currentDates;
-        this.getCurrentDay();
     },
     onEndDetach: function () {
         $('.add-note-icon').hide();
         this.model.reset([]);
         this.account = null;
         this.renderRequest = true;
+    },
+    showSchedule: function () {
+        var cb = _.bind(this.getDates, this),
+            session = RAD.models.Session.toJSON();
+
+        if(session._id =! session.currentSchedule) $('.add-note-icon').show();
+        $('h5').html(this.account.name);
+        RAD.Storage.updateSchedule(this.account._id, cb);
+    },
+    getDates: function (currentDates) {
+        this.weekDates = currentDates;
+        this.getCurrentDay();
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
@@ -67,5 +76,9 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         this.currentDay = _.filter(this.model.toJSON(), function(item){
             return moment(item.date.local).format("DD") == currentDay && item.subject
         });
+    },
+    updateView: function () {
+        this.onNewExtras();
+        this.showSchedule();
     }
 }));

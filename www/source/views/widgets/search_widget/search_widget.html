@@ -6,8 +6,14 @@
     </div>
 </div>
 
-<div class="search-scroll-wrapper scroll-view"  data-template>
+<div id="load-element" class="progress without-margin hidden">
+    <div class="indeterminate"></div>
+</div>
+
+<div class="search-scroll-wrapper" id="wrapper" data-template>
     <ul class="scroll-list">
+        <div id="pullDown" style="display: none"></div>
+
         {{# var self = this; }}
         {{# _.each(this.sortedCollections, function(item){ }}
             <li class="item" data-target="{{= item._id }}">

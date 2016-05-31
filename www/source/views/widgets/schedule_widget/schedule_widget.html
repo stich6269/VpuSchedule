@@ -20,8 +20,9 @@
     <div class="indeterminate"></div>
 </div>
 
-<div class="scroll-wrapper-lessons scroll-view">
+<div class="scroll-wrapper-lessons" id="wrapper">
     <ul id="staggered-test" class="lessons-list">
+        <div id="pullDown" style="display: none"></div>
         {{# if(this.currentDay){ }}
             {{# if(this.currentDay.length){ }}
                 {{# _.each(this.currentDay, function(item){ }}

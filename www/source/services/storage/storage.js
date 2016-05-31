@@ -19,6 +19,20 @@ RAD.namespace('Storage', {
             self.setLocalStore('Session', data);
         })
     },
+    events: function () {
+        this.Session.on('all', function (e) {
+            console.log('Session: ' + e);
+        });
+        this.Teachers.on('all', function (e) {
+            console.log('Session: ' + e);
+        });
+        this.Groups.on('all', function (e) {
+            console.log('Session: ' + e);
+        });
+        this.Lessons.on('all', function (e) {
+            console.log('Session: ' + e);
+        });
+    },
     updateList: function (callback) {
         var list = this.getLocalStore('List');
         if (!list) return this.loadList(callback);
@@ -34,6 +48,7 @@ RAD.namespace('Storage', {
         var self = this,
             sortedList;
 
+        console.log('load list')
         this.publish('service.network.get_list', {
             success: function (resp) {
                 sortedList = resp.sort(function(a, b){

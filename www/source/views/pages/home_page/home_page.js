@@ -28,37 +28,31 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
             outsideClose: true
         });
     },
+    showSchedule: function () {
+        this.selectAction('view.schedule_widget');
+    },
     onMenuItem: function (e) {
         var $elem = $(e.currentTarget),
             view = $elem.attr('data-target'),
-            scView = 'view.schedule_widget',
-            $items = $('.menu-item'),
-            self = this;
+            $items = $('.menu-item');
         
         $items.toggleClass('active', false);
         $elem.toggleClass('active', true);
-        
-        if(view == scView ){
-            this.showSchedule();
-        } else{
-            this.onCloseMenu(function () {
-                self.showPage(view);
-            });
-        }
+        this.selectAction(view)
     },
-    showSchedule: function () {
-        var scView = 'view.schedule_widget',
-            schedule = RAD.core.getView(scView),
+    selectAction: function (viewId) {
+        var selector = '[view="' + viewId + '"]',
+            view = RAD.core.getView(viewId),
+            isActive = !!$(selector).length,
             self = this;
 
-        if(schedule.mScroll){
+        if(isActive){
             this.onCloseMenu(function () {
-                schedule.account = null;
-                schedule.showSchedule()
+                typeof view.updateView == 'function' && view.updateView();
             });
-        } else{
+        }else{
             this.onCloseMenu(function () {
-                self.showPage(scView);
+                self.showPage(viewId);
             });
         }
     },
