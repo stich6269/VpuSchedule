@@ -66,12 +66,22 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
             this.getCurrentDay(date);
         }
 
+        $('h5').html(moment(firsDay).format("DD/MM/YYYY"));
         $elem.addClass('active');
     },
     getDaySchedule: function (currentDay) {
         this.currentDay = _.filter(this.model.toJSON(), function(item){
             return moment(item.date.local).format("DD") == currentDay && item.subject
         });
+
+        if(this.currentDay.length){
+            var date = this.currentDay[0].date.local;
+            $('h5').html(moment(date).format("DD/MM/YYYY"));
+        }else{
+            $('h5').html(this.account.name);
+        }
+
+
     },
     updateView: function () {
         this.showSchedule();

@@ -96,7 +96,7 @@ RAD.namespace('Storage', {
             sortArr = [{
                 dayIndex: 1,
                 dayStr:'пн',
-                local: moment(1).isoWeekday()
+                local: moment(1).isoWeekday(),
             }]
         }
 
@@ -108,7 +108,7 @@ RAD.namespace('Storage', {
                 sortArr.push({
                     dayIndex: i,
                     dayStr: week[i],
-                    local: moment(lastDate).add(count++, 'days'),
+                    local: moment(lastDate).add(count++, 'days')
                 });
             }
         }
