@@ -3,7 +3,6 @@
     <div class="container margin-top">
         <div class="input-field col s12">
             <select id="type">
-                <option>Выбрать:</option>
                 <option {{ this.isTeacher ? '':'selected' }}>Студент</option>
                 <option {{ this.isTeacher ? 'selected':'' }}>Преподаватель</option>
             </select>
@@ -11,7 +10,6 @@
         </div>
         <div class="input-field col s12">
             <select id="account">
-                <option>Выбрать:</option>
                 {{# if (this.isTeacher){ }}
                     {{# _.each(this.teachers, function(item){ }}
                         <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>

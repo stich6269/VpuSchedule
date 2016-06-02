@@ -9,8 +9,8 @@ RAD.view("view.search_widget", RAD.Blanks.View.extend({
         'keyup .search-input' : 'onSearch',
         'click .item' : 'onItem'
     },
-    onStartAttach: function () {
-        RAD.Storage.updateList(_.bind(this.updateCollection, this));
+    onEndAttach: function () {
+       this.updateView();
     },
     onEndDetach: function () {
         this.$('.search-input').val('');

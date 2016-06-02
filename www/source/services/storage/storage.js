@@ -47,8 +47,7 @@ RAD.namespace('Storage', {
     loadList: function (callback) {
         var self = this,
             sortedList;
-
-        console.log('load list')
+        
         this.publish('service.network.get_list', {
             success: function (resp) {
                 sortedList = resp.sort(function(a, b){
@@ -67,7 +66,6 @@ RAD.namespace('Storage', {
             currentDates;
         
         if (!schedule) return this.loadSchedule(id, callback);
-
         this.Lessons.reset(schedule, {silent: true});
         currentDates = this.getWeekDates();
         typeof callback == 'function' && callback(currentDates);
@@ -78,7 +76,7 @@ RAD.namespace('Storage', {
         this.publish('service.network.get_schedule', {
             extras: {id: id},
             success: function (resp) {
-                if(resp.length) {
+                if(resp) {
                     self.setLocalStore(id, resp);
                     self.updateSchedule(id, callback);
                 }
@@ -86,21 +84,31 @@ RAD.namespace('Storage', {
         })
     },
     getWeekDates: function () {
-        var dates = _.pluck(this.Lessons.toJSON(), 'date'),
-            str = _.map(dates, function(item){return JSON.stringify(item)}),
-            parsedDates =  _.map(_.uniq(str), function(item){return JSON.parse(item)}),
-            sortArr =  _(parsedDates).sortBy('dayIndex'),
+        var dates, str, parsedDates, sortArr,
             week = ['пн','вт','ср','чт','пт','сб','вс'];
+
+        if(this.Lessons.length){
+            dates = _.pluck(this.Lessons.toJSON(), 'date');
+            str = _.map(dates, function(item){return JSON.stringify(item)});
+            parsedDates =  _.map(_.uniq(str), function(item){return JSON.parse(item)});
+            sortArr =  _(parsedDates).sortBy('dayIndex');
+        }else{
+            sortArr = [{
+                dayIndex: 1,
+                dayStr:'пн',
+                local: moment(1).isoWeekday()
+            }]
+        }
 
         for (var i = 1; 7 > i; i++) {
             if(!sortArr[i]) {
                 var lastDate = sortArr[i-1].local,
                     count = 1;
-
+                
                 sortArr.push({
                     dayIndex: i,
                     dayStr: week[i],
-                    local: moment(lastDate).add(count++, 'days')
+                    local: moment(lastDate).add(count++, 'days'),
                 });
             }
         }

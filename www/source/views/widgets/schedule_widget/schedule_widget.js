@@ -3,44 +3,40 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
     model: RAD.models.Lessons,
     weekDates: null,
     currentDay: null,
-    account: null,
     events: {
         'click .lesson' : 'onLessons'
     },
+    onInitialize: function () {
+        this.account = RAD.models.Session.toJSON();
+    },
     onNewExtras: function (data) {
-        var session = RAD.models.Session;
-        this.account = data || session.pick('_id', 'name', 'teacher');
-        if(this.account) session.set({currentSchedule: this.account._id})
+        if(data) this.account = data;
+        this.renderRequest = true;
     },
-    onStartRender: function () {
-        if(!this.account) this.onNewExtras();
-    },
-    onEndRender: function () {
-        var cb = _.bind(this.showSchedule, this),
-            id = this.account._id;
-
-        setTimeout(function () {
-            RAD.ptr.initialize('wrapper', 'pullDown', function () {
-                RAD.Storage.loadSchedule(id, cb);
-            })
-        }, 0)
-    },
-    onStartAttach: function () {
+    onEndAttach: function () {
         this.showSchedule();
     },
     onEndDetach: function () {
         $('.add-note-icon').hide();
-        this.model.reset([]);
-        this.account = null;
-        this.renderRequest = true;
+    },
+    onEndRender: function () {
+        var cb = _.bind(this.showSchedule, this),
+            id = this.account._id,
+            self = this;
+
+        setTimeout(function () {
+            self.mScroll = RAD.ptr.initialize('wrapper', 'pullDown', function () {
+                RAD.Storage.loadSchedule(id, cb);
+            })
+        }, 0)
     },
     showSchedule: function () {
         var cb = _.bind(this.getDates, this),
             session = RAD.models.Session.toJSON();
 
         if(session._id =! session.currentSchedule) $('.add-note-icon').show();
-        $('h5').html(this.account.name);
         RAD.Storage.updateSchedule(this.account._id, cb);
+        this.mScroll.refresh();
     },
     getDates: function (currentDates) {
         this.weekDates = currentDates;
@@ -78,7 +74,6 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
         });
     },
     updateView: function () {
-        this.onNewExtras();
         this.showSchedule();
     }
 }));
