@@ -80,8 +80,6 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
         }else{
             $('h5').html(this.account.name);
         }
-
-
     },
     updateView: function () {
         this.showSchedule();

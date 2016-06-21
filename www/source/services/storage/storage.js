@@ -84,33 +84,12 @@ RAD.namespace('Storage', {
         })
     },
     getWeekDates: function () {
-        var dates, str, parsedDates, sortArr,
+        var sortArr = [],
             week = ['пн','вт','ср','чт','пт','сб','вс'];
 
-        if(this.Lessons.length){
-            dates = _.pluck(this.Lessons.toJSON(), 'date');
-            str = _.map(dates, function(item){return JSON.stringify(item)});
-            parsedDates =  _.map(_.uniq(str), function(item){return JSON.parse(item)});
-            sortArr =  _(parsedDates).sortBy('dayIndex');
-        }else{
-            sortArr = [{
-                dayIndex: 1,
-                dayStr:'пн',
-                local: moment(1).isoWeekday(),
-            }]
-        }
-
-        for (var i = 1; 7 > i; i++) {
-            if(!sortArr[i]) {
-                var lastDate = sortArr[i-1].local,
-                    count = 1;
-                
-                sortArr.push({
-                    dayIndex: i,
-                    dayStr: week[i],
-                    local: moment(lastDate).add(count++, 'days')
-                });
-            }
+        for (var i = 0; 7 > i; i++) {
+            var day = moment().isoWeekday(1).add(i, 'days');
+            sortArr.push({dayIndex: i, dayStr: week[i], local: +day});
         }
 
         return sortArr;
