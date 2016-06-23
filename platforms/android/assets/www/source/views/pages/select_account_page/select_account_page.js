@@ -5,11 +5,10 @@ RAD.view("view.select_account_page", RAD.Blanks.ScrollableView.extend({
         'tap .item' : 'onItem'
     },
     onStartAttach: function () {
-        if(RAD.models.Session.isTeacher()){
-            this.bindModel(RAD.model('Teachers'));
-        }else{
-            this.bindModel(RAD.model('Groups'));
-        }
+        var isTeacher = RAD.models.Session.get('teacher');
+        
+        this.model = isTeacher ? RAD.models.Teachers : RAD.models.Groups;
+        this.render();
     },
     onItem: function (e) {
         var value = $(e.currentTarget),

@@ -15,16 +15,22 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         this.account = null;
     },
     onNewExtras: function (data) {
-        if(data) this.account = data;
-        this.selectedDay = moment().isoWeekday();
+        this.currentDay = null;
         this.model.reset([]);
+        if(data) this.account = data;
     },
     onStartAttach: function () {
+        var fullDate = moment().format("DD/MM/YYYY");
+        $('h5').html(fullDate);
+    },
+    onStartRender: function () {
+        this.getDates();
+    },
+    onEndAttach: function () {
         var cb = _.bind(this.getCurrentDay, this);
-
+        this.selectedDay = moment().isoWeekday();
         if(!this.account) this.account = RAD.models.Session.toJSON();
         RAD.Storage.updateSchedule(this.account._id, cb);
-        this.getDates();
     },
     getDates: function () {
         var sortArr = [],
@@ -36,7 +42,6 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
         }
 
         this.weekDates = sortArr;
-        this.getCurrentDay();
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
@@ -71,6 +76,7 @@ RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     },
     updateView: function () {
         this.account = RAD.models.Session.toJSON();
+        this.selectedDay = moment().isoWeekday();
         var cb = _.bind(this.getCurrentDay, this);
         RAD.Storage.updateSchedule(this.account._id, cb);
     }

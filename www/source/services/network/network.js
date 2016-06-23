@@ -1,5 +1,5 @@
 (function () {
-    var BASE_URL = 'http://localhost:3000/', //'http://vpuapp.herokuapp.com/',
+    var BASE_URL = 'http://vpuapp.herokuapp.com/',
         GET_LIST = BASE_URL + 'get_list',
         LESSONS_LIST = BASE_URL + 'get_schedule';
 
@@ -17,7 +17,6 @@
     RAD.service('service.network', RAD.Blanks.Service.extend({
         requestCounter: 0,
         loadingShow: function () {
-            console.log('show load')
             this.requestCounter++;
             if (this.requestCounter === 1) {
                 $('#load-element').toggleClass('hidden', false);

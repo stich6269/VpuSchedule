@@ -1,3 +1,4 @@
+{{# var data = RAD.models.Session.toJSON(); }}
 <div class="container home-header">
     <div class="row navigation white-text">
         <div class="menu-icon"></div>
@@ -8,21 +9,24 @@
     </div>
 </div>
 
+
 <div id="home-container"></div>
+<div id="load-element" class="spinner hidden">
+    <div class="spinner-wrapper"></div>
+</div>
 
 <nav style="display: none" data-template>
     <ul id="slide-out" class="side-nav">
         <li class="menu-head-wrapper">
-            <div class="{{ RAD.models.Session.isTeacher() ? 'user-icon teacher' : 'user-icon student' }}"></div>
+            <div class="{{ data.teacher ? 'user-icon teacher' : 'user-icon student' }}"></div>
             <div class="info-container">
-                <div class="{{ RAD.models.Session.isTeacher() ? 'teacher-name' : 'group-name' }}" id="name">
-                    {{= RAD.models.Session.get('name') }}
+                <div class="{{ data.teacher ? 'teacher-name' : 'group-name' }}" id="name">
+                    {{= data.name }}
                 </div>
             </div>
         </li>
-        <li class="menu-item home active" data-target="view.my_schedule_widget">Мое рассписание</li>
+        <li class="menu-item home active" data-target="view.schedule_widget">Мое рассписание</li>
         <li class="menu-item search" data-target="view.search_widget">Поиск</li>
-        <li class="menu-item favorites" data-target="view.favorites_widget">Избранное</li>
         <li class="menu-item setup" data-target="view.setup_widget">Настройки</li>
         <li class="menu-item about" data-target="view.about_widget">О приложении</li>
     </ul>

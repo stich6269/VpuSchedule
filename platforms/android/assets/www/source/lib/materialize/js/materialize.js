@@ -2254,7 +2254,7 @@ if ($) {
                                     complete: function () {
                                         $(this).remove();
                                     }});
-                                dragTarget.css({width: '50px', right: '', left: 0});
+                                dragTarget.css({width: '30px', right: '', left: 0});
                             }
                         }
                         else {
@@ -2276,7 +2276,7 @@ if ($) {
                                     complete: function () {
                                         $(this).remove();
                                     }});
-                                dragTarget.css({width: '50px', right: 0, left: ''});
+                                dragTarget.css({width: '30px', right: 0, left: ''});
                             }
                         }
 

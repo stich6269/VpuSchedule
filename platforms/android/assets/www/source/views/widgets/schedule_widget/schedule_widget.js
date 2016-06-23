@@ -1,59 +1,83 @@
 RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
-    url: 'source/views/widgets/my_schedule_widget/my_schedule_widget.html',
+    url: 'source/views/widgets/schedule_widget/schedule_widget.html',
     model: RAD.models.Lessons,
-    currentWeek: null,
-    currentDay: null,
     account: null,
+    selectedDay: moment().isoWeekday(),
+    weekDates: null,
+    currentDay: null,
     events: {
         'click .lesson' : 'onLessons'
     },
-    onNewExtras: function (data) {
-        this.account = data;
-    },
-    onEndAttach: function () {
-        this.getSchedule();
-    },
-    onStartAttach: function () {
-        $('h5').html(this.account.name);
-        $('.add-note-icon').show();
+    onInitialize: function () {
+        this.account = RAD.models.Session.toJSON();
     },
     onEndDetach: function () {
+        this.account = null;
+    },
+    onNewExtras: function (data) {
+        this.currentDay = null;
         this.model.reset([]);
-        $('.add-note-icon').hide();
-        this.renderRequest = true;
+        if(data) this.account = data;
+    },
+    onStartAttach: function () {
+        var fullDate = moment().format("DD/MM/YYYY");
+        $('h5').html(fullDate);
+    },
+    onStartRender: function () {
+        this.getDates();
+    },
+    onEndAttach: function () {
+        var cb = _.bind(this.getCurrentDay, this);
+        this.selectedDay = moment().isoWeekday();
+        if(!this.account) this.account = RAD.models.Session.toJSON();
+        RAD.Storage.updateSchedule(this.account._id, cb);
+    },
+    getDates: function () {
+        var sortArr = [],
+            week = ['пн','вт','ср','чт','пт','сб','вс'];
+
+        for (var i = 0; 7 > i; i++) {
+            var day = moment().isoWeekday(1).add(i, 'days');
+            sortArr.push({dayIndex: i, dayStr: week[i], local: +day});
+        }
+
+        this.weekDates = sortArr;
     },
     onLessons: function (e) {
         var $item = $(e.currentTarget),
-            dayId = +$item.attr('data-target'),
+            dayId = $item.attr('data-target'),
             $items = this.$('.lesson');
 
         $items.toggleClass('active', false);
+        this.selectedDay = dayId;
         this.getCurrentDay(dayId);
     },
-    getSchedule: function () {
-        var self = this;
-        
-        this.publish('service.network.get_schedule', {
-            extras: {id: self.account._id},
-            success: function (resp) {
-                self.model.reset(resp, {silent: true});
-                self.getCurrentDay();
-            },
-            error: function (err) {
-                RAD.application.showAlert({message: err.responseText});
-            }
-        })
-    },
-    getCurrentDay: function (dayId) {
-        var data = this.model.toJSON(),
-            date = dayId || moment().day();
+    getCurrentDay: function () {
+        var date = this.selectedDay,
+            self = this;
 
-        this.currentDay = _.filter(data, function(item){
-            return item.date.dayIndex == date && item.subject
-        });
-
+        this.getDaySchedule(date);
         this.render(function () {
-            $('[data-target=' + date +']').addClass('active');
+            self.setDay(date);
         });
+    },
+    setDay: function (date) {
+        var $elem = $('[data-target=' + date +']'),
+            localDate = this.weekDates[date-1].local,
+            fullDate = moment(localDate).format("DD/MM/YYYY");
+
+        $('h5').html(fullDate);
+        $elem.addClass('active');
+    },
+    getDaySchedule: function (currentDay) {
+        this.currentDay = _.filter(this.model.toJSON(), function(item){
+            return item.date.dayIndex == currentDay && item.subject
+        });
+    },
+    updateView: function () {
+        this.account = RAD.models.Session.toJSON();
+        this.selectedDay = moment().isoWeekday();
+        var cb = _.bind(this.getCurrentDay, this);
+        RAD.Storage.updateSchedule(this.account._id, cb);
     }
 }));

@@ -1,38 +1,16 @@
-{{# var data = this.account }}
+{{# var data = this.account ||  RAD.models.Session.toJSON()}}
 
 
 <div class="container">
     <div class="row navigation white-text">
         <div class="col s12">
             <ul class="days-list">
-                <li class="lesson" data-target="1">
-                    <div class="day-name">пн</div>
-                    <div class="day-date">{{= moment().isoWeekday(1).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="2">
-                    <div class="day-name">вт</div>
-                    <div class="day-date">{{= moment().isoWeekday(2).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="3">
-                    <div class="day-name">ср</div>
-                    <div class="day-date">{{= moment().isoWeekday(3).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="4">
-                    <div class="day-name">чт</div>
-                    <div class="day-date">{{= moment().isoWeekday(4).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="5">
-                    <div class="day-name">пт</div>
-                    <div class="day-date">{{= moment().isoWeekday(5).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="6">
-                    <div class="day-name">сб</div>
-                    <div class="day-date">{{= moment().isoWeekday(6).format('DD') }}</div>
-                </li>
-                <li class="lesson" data-target="7">
-                    <div class="day-name">вс</div>
-                    <div class="day-date">{{= moment().isoWeekday(7).format('DD') }}</div>
-                </li>
+                {{# _.map(this.weekDates, function(item){ }}
+                    <li class="lesson" data-target="{{= moment(item.local).isoWeekday() }}">
+                        <div class="day-name">{{= item.dayStr }}</div>
+                        <div class="day-date">{{= moment(item.local).format('DD') }}</div>
+                    </li>
+                {{# }) }}
             </ul>
         </div>
     </div>
@@ -42,8 +20,9 @@
     <div class="indeterminate"></div>
 </div>
 
-<div class="scroll-wrapper-lessons scroll-view">
+<div class="scroll-wrapper-lessons scroll-view" id="wrapper">
     <ul id="staggered-test" class="lessons-list">
+        <div id="pullDown" style="display: none"></div>
         {{# if(this.currentDay){ }}
             {{# if(this.currentDay.length){ }}
                 {{# _.each(this.currentDay, function(item){ }}
@@ -56,7 +35,7 @@
                         <div class="subject">{{= item.subject }}</div>
                         <div class="details">
                             <div class="auditory">{{= item.auditory }}</div>
-                            <div class="teacher-label">{{= data.isTeacher ? item.groupName : item.teacherName  }}</div>
+                            <div class="teacher-label">{{= data.teacher ? item.groupName : item.teacherName  }}</div>
                         </div>
                     </div>
                 </li>

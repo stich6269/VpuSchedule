@@ -1,34 +1,36 @@
 {{# var self =  this; }}
+
+
 <div class="simple-container">
-    <div class="container margin-top">
-        <div class="input-field col s12">
-            <select id="type">
-                <option>Выбрать:</option>
-                <option {{ this.isTeacher ? '':'selected' }}>Студент</option>
-                <option {{ this.isTeacher ? 'selected':'' }}>Преподаватель</option>
-            </select>
-            <label>Тип пользователя:</label>
-        </div>
-        <div class="input-field col s12">
-            <select id="account">
-                <option>Выбрать:</option>
-                {{# if (this.isTeacher){ }}
-                    {{# _.each(this.teachers, function(item){ }}
-                        <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
-                    {{# }) }}
-                {{# }else{ }}
-                    {{# _.each(this.groups, function(item){ }}
-                        <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
-                    {{# }) }}
-                {{# } }}
-            </select>
-            <label>Ваш новый аккаунт:</label>
-        </div>
+    {{# if(this.teachers){ }}
+        <div class="container margin-top">
+            <div class="input-field col s12">
+                <select id="type">
+                    <option {{ this.isTeacher ? '':'selected' }}>Студент</option>
+                    <option {{ this.isTeacher ? 'selected':'' }}>Преподаватель</option>
+                </select>
+                <label>Тип пользователя:</label>
+            </div>
+            <div class="input-field col s12">
+                <select id="account">
+                    {{# if (this.isTeacher){ }}
+                        {{# _.each(this.teachers, function(item){ }}
+                            <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
+                        {{# }) }}
+                    {{# }else{ }}
+                        {{# _.each(this.groups, function(item){ }}
+                            <option {{ RAD.models.Session.get('name') == item.name ? 'selected':'' }}>{{= item.name }}</option>
+                        {{# }) }}
+                    {{# } }}
+                </select>
+                <label>Ваш новый аккаунт:</label>
+            </div>
 
 
-        <div class="center-block center bind-bottom">
-            <button class="btn long waves-effect  light-blue darken-3" type="submit" name="action">Сохранить</button>
-        </div>
+            <div class="center-block center bind-bottom">
+                <button class="btn long waves-effect  light-blue darken-3" type="submit" name="action">Сохранить</button>
+            </div>
 
-    </div>
+        </div>
+    {{# } }}
 </div>

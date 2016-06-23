@@ -9,26 +9,30 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
         'keyup .search-input' : 'onSearch',
         'click .item' : 'onItem'
     },
-    onStartAttach: function () {
-        var groups = RAD.models.Groups.toJSON(),
-            teachers = RAD.models.Teachers.toJSON();
+    onEndAttach: function () {
+        var cb = _.bind(this.updateCollection, this);
 
         $('h5').html('Поиск');
+        RAD.Storage.updateList(cb);
+    },
+    onEndDetach: function () {
+        this.$('.search-input').val('');
+        this.sortedCollections = [];
+        this.renderRequest = true;
+    },
+    updateCollection: function () {
+        var groups = RAD.models.Groups.toJSON(),
+            teachers = RAD.models.Teachers.toJSON();
 
         this.models = teachers.concat(groups);
         this.sortedCollections = this.models;
         this.render();
-    },
-    onEndDetach: function () {
-        this.$('.search-input').val('');
     },
     onItem: function (e) {
         var $elem = $(e.currentTarget),
             id = $elem.attr('data-target'),
             model = _.findWhere(this.models, {_id: id});
 
-        model.isTeacher = !(!!model.course);
-        RAD.models.Session.set({currentSchedule: model});
         this.openSchedule(model);
     },
     openSchedule: function (extras) {
@@ -38,7 +42,7 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
             animation: 'slide',
             extras: extras
         };
-
+        
         this.publish('navigation.show', options);
     },
     onSearch: function (e) {
@@ -60,5 +64,9 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
         }
 
         this.render();
+    },
+    updateView: function () {
+        var cb = _.bind(this.updateCollection, this);
+        RAD.Storage.loadList(cb);
     }
 }));

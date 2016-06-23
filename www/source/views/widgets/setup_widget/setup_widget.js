@@ -9,7 +9,7 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
         'change #type' : 'onType',
         'click .btn' : 'onSubmit'
     },
-    onStartAttach: function () {
+    onEndAttach: function () {
         var cb = _.bind(this.updateCollection, this);
         RAD.Storage.updateList(cb);
     },

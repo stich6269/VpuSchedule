@@ -9,7 +9,7 @@ RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
         'keyup .search-input' : 'onSearch',
         'click .item' : 'onItem'
     },
-    onStartAttach: function () {
+    onEndAttach: function () {
         var cb = _.bind(this.updateCollection, this);
 
         $('h5').html('Поиск');

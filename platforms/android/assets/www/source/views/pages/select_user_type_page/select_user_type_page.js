@@ -6,18 +6,12 @@ RAD.view("view.select_user_type_page", RAD.Blanks.View.extend({
         'click .btn' : 'onSubmit'
     },
     onSubmit: function(){
-        var self = this;
-
-        this.publish('service.network.get_groups', {
-            success: function (resp) {
-                RAD.models.Groups.reset(resp);
-                self.publish('service.network.get_teachers', {
-                    success: function (resp) {
-                        RAD.models.Teachers.reset(resp);
-                        self.openSelectAccountPage();
-                    }
-                });
-            }
+        var currentPosition = this.carousel.getActiveIndex();
+        
+        RAD.Storage.updateList(_.bind(this.openSelectAccountPage, this));
+        RAD.models.Session.set({
+            student: !(!!currentPosition),
+            teacher: !!currentPosition
         });
     },
     openSelectAccountPage: function () {
@@ -40,12 +34,10 @@ RAD.view("view.select_user_type_page", RAD.Blanks.View.extend({
 
         this.carousel.on('changeActiveIndex', function() {
             var elements = self.$('.slide'),
-                currentPosition = self.carousel.getActiveIndex(),
-                userType = !currentPosition ? 'student' : 'teacher';
+                currentPosition = self.carousel.getActiveIndex();
 
             elements.toggleClass('active', false);
             $(elements[currentPosition]).toggleClass('active', true);
-            RAD.models.Session.set({userType: userType});
         });
     },
     onSlide: function (e) {
