@@ -17,7 +17,7 @@ RAD.application(function (core) {
         var options = {
             container_id: '#screen',
             content: pageName,
-            animation: 'slide'
+            animation: 'none'
         };
 
         core.publish('navigation.show', options);
@@ -33,7 +33,6 @@ RAD.application(function (core) {
     };
 
     app.showAlert = function (data) {
-        console.log(data)
         var options = {
             content: "view.alert",
             extras: data

@@ -232,15 +232,8 @@ ul.scroll-list {
     height: 50px;
     background-image: url("../images/menu-icon.png");
     background-repeat: no-repeat;
-<<<<<<<
-    HEAD
-    background-size: 45% 50%;
-    background-size: 26% 62%;
-=======
     background-size: 25px 32px;
     background-position: 28px 8px;
->>>>>>>
-    VpuSchedule;
 }
 
 .row.navigation {
@@ -249,8 +242,8 @@ ul.scroll-list {
 }
 
 ul.days-list {
-    width: 96%;
-    margin-left: -3%;
+    width: 95%;
+    margin-left: -12px;
 }
 
 ul.days-list li {

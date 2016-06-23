@@ -10,7 +10,6 @@
         //Services
         "source/services/network/network.js",
         "source/services/transliterate/transliterate.js",
-        "source/services/pull_to_refresh/pull_to_refresh.js",
 
         //Models
         "source/models/session/session.js",
@@ -31,7 +30,6 @@
         
         //Widgets
         "source/views/widgets/about_widget/about_widget.js",
-        "source/views/widgets/favorites_widget/favorites_widget.js",
         "source/views/widgets/setup_widget/setup_widget.js",
         "source/views/widgets/schedule_widget/schedule_widget.js",
         "source/views/widgets/search_widget/search_widget.js",

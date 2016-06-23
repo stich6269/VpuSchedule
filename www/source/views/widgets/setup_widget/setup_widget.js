@@ -10,7 +10,8 @@ RAD.view("view.setup_widget", RAD.Blanks.View.extend({
         'click .btn' : 'onSubmit'
     },
     onStartAttach: function () {
-        this.updateView();
+        var cb = _.bind(this.updateCollection, this);
+        RAD.Storage.updateList(cb);
     },
     onType: function (e) {
         var currentValue = $('.active').find('span').html();

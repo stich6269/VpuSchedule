@@ -1,6 +1,8 @@
-RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
+RAD.view("view.schedule_widget", RAD.Blanks.ScrollableView.extend({
     url: 'source/views/widgets/schedule_widget/schedule_widget.html',
     model: RAD.models.Lessons,
+    account: null,
+    selectedDay: moment().isoWeekday(),
     weekDates: null,
     currentDay: null,
     events: {
@@ -9,37 +11,31 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
     onInitialize: function () {
         this.account = RAD.models.Session.toJSON();
     },
+    onEndDetach: function () {
+        this.account = null;
+    },
     onNewExtras: function (data) {
         if(data) this.account = data;
-        this.renderRequest = true;
+        this.selectedDay = moment().isoWeekday();
+        this.model.reset([]);
     },
-    onEndAttach: function () {
-        this.showSchedule();
-    },
-    onEndDetach: function () {
-        $('.add-note-icon').hide();
-    },
-    onEndRender: function () {
-        var cb = _.bind(this.showSchedule, this),
-            id = this.account._id,
-            self = this;
+    onStartAttach: function () {
+        var cb = _.bind(this.getCurrentDay, this);
 
-        setTimeout(function () {
-            self.mScroll = RAD.ptr.initialize('wrapper', 'pullDown', function () {
-                RAD.Storage.loadSchedule(id, cb);
-            })
-        }, 0)
-    },
-    showSchedule: function () {
-        var cb = _.bind(this.getDates, this),
-            session = RAD.models.Session.toJSON();
-
-        if(session._id =! session.currentSchedule) $('.add-note-icon').show();
+        if(!this.account) this.account = RAD.models.Session.toJSON();
         RAD.Storage.updateSchedule(this.account._id, cb);
-        this.mScroll.refresh();
+        this.getDates();
     },
-    getDates: function (currentDates) {
-        this.weekDates = currentDates;
+    getDates: function () {
+        var sortArr = [],
+            week = ['пн','вт','ср','чт','пт','сб','вс'];
+
+        for (var i = 0; 7 > i; i++) {
+            var day = moment().isoWeekday(1).add(i, 'days');
+            sortArr.push({dayIndex: i, dayStr: week[i], local: +day});
+        }
+
+        this.weekDates = sortArr;
         this.getCurrentDay();
     },
     onLessons: function (e) {
@@ -48,40 +44,34 @@ RAD.view("view.schedule_widget", RAD.Blanks.View.extend({
             $items = this.$('.lesson');
 
         $items.toggleClass('active', false);
+        this.selectedDay = dayId;
         this.getCurrentDay(dayId);
     },
-    getCurrentDay: function (dayId) {
-        var date = dayId || moment().format("DD"),
-            setFirsDay = _.partial(this.setFirstDay, date);
+    getCurrentDay: function () {
+        var date = this.selectedDay,
+            self = this;
 
         this.getDaySchedule(date);
-        this.render(_.bind(setFirsDay, this));
+        this.render(function () {
+            self.setDay(date);
+        });
     },
-    setFirstDay: function (date) {
+    setDay: function (date) {
         var $elem = $('[data-target=' + date +']'),
-            firsDay = this.weekDates[0].local;
+            localDate = this.weekDates[date-1].local,
+            fullDate = moment(localDate).format("DD/MM/YYYY");
 
-        if(!$elem.length){
-            date = moment(firsDay).format("DD");
-            this.getCurrentDay(date);
-        }
-
-        $('h5').html(moment(firsDay).format("DD/MM/YYYY"));
+        $('h5').html(fullDate);
         $elem.addClass('active');
     },
     getDaySchedule: function (currentDay) {
         this.currentDay = _.filter(this.model.toJSON(), function(item){
-            return moment(item.date.local).format("DD") == currentDay && item.subject
+            return item.date.dayIndex == currentDay && item.subject
         });
-
-        if(this.currentDay.length){
-            var date = this.currentDay[0].date.local;
-            $('h5').html(moment(date).format("DD/MM/YYYY"));
-        }else{
-            $('h5').html(this.account.name);
-        }
     },
     updateView: function () {
-        this.showSchedule();
+        this.account = RAD.models.Session.toJSON();
+        var cb = _.bind(this.getCurrentDay, this);
+        RAD.Storage.updateSchedule(this.account._id, cb);
     }
 }));

@@ -1,4 +1,4 @@
-RAD.view("view.search_widget", RAD.Blanks.View.extend({
+RAD.view("view.search_widget", RAD.Blanks.ScrollableView.extend({
     url: 'source/views/widgets/search_widget/search_widget.html',
     models: null,
     sortedCollections: [],
@@ -9,26 +9,20 @@ RAD.view("view.search_widget", RAD.Blanks.View.extend({
         'keyup .search-input' : 'onSearch',
         'click .item' : 'onItem'
     },
-    onEndAttach: function () {
-       this.updateView();
+    onStartAttach: function () {
+        var cb = _.bind(this.updateCollection, this);
+
+        $('h5').html('Поиск');
+        RAD.Storage.updateList(cb);
     },
     onEndDetach: function () {
         this.$('.search-input').val('');
-    },
-    onEndRender: function () {
-        var cb = _.bind(this.updateCollection, this);
-
-        setTimeout(function () {
-            RAD.ptr.initialize('wrapper', 'pullDown', function () {
-                RAD.Storage.loadList(cb);
-            })
-        }, 0)
+        this.sortedCollections = [];
+        this.renderRequest = true;
     },
     updateCollection: function () {
         var groups = RAD.models.Groups.toJSON(),
             teachers = RAD.models.Teachers.toJSON();
-
-        $('h5').html('Поиск');
 
         this.models = teachers.concat(groups);
         this.sortedCollections = this.models;
@@ -72,6 +66,7 @@ RAD.view("view.search_widget", RAD.Blanks.View.extend({
         this.render();
     },
     updateView: function () {
-        RAD.Storage.updateList(_.bind(this.updateCollection, this));
+        var cb = _.bind(this.updateCollection, this);
+        RAD.Storage.loadList(cb);
     }
 }));

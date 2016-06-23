@@ -17,6 +17,7 @@
     RAD.service('service.network', RAD.Blanks.Service.extend({
         requestCounter: 0,
         loadingShow: function () {
+            console.log('show load')
             this.requestCounter++;
             if (this.requestCounter === 1) {
                 $('#load-element').toggleClass('hidden', false);
@@ -75,7 +76,6 @@
         },
 
         showError: function (statusCode) {
-            console.log(statusCode)
             var message = 'Ошибка при загрузке данных. Попробуйтеобновить страницу или ' +
                 'сообщите об ошибке администратору.',
                 statusMsg = {

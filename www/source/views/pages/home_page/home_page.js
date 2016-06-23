@@ -76,9 +76,8 @@ RAD.view("view.home_page", RAD.Blanks.View.extend({
     },
     startMenu: function () {
         this.$menu.sideNav({
-                edge: 'left',
-                closeOnClick: true
-            }
-        );
+            edge: 'left',
+            closeOnClick: true
+        });
     }
 }));
